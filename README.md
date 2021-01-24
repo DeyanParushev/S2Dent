@@ -1,2 +1,8 @@
 # S2Dent
-Dental clinic web app.
+Web app for a dental clinic.
+
+Technologies used:
+ASP.NET MVC
+MS SQL
+Razor views
+Automapper
