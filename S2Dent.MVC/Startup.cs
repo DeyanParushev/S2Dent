@@ -1,9 +1,13 @@
 namespace S2Dent.MVC
 {
+    using System;
     using System.Reflection;
     using AutoMapper;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.CookiePolicy;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -43,6 +47,14 @@ namespace S2Dent.MVC
                 .AddRazorRuntimeCompilation();
 
             services.AddAutoMapper(typeof(Startup));
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                //options.HttpOnly = HttpOnlyPolicy.Always;
+                options.ConsentCookie.Expiration = DateTime.UtcNow.AddDays(3) - DateTime.UtcNow;
+            });
+
 
             services.AddRazorPages();
         }
@@ -68,6 +80,7 @@ namespace S2Dent.MVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
