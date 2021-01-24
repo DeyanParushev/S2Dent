@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.2" />
@@ -16,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\S2Dent.DTOs\S2Dent.DTOs.csproj" />
     <ProjectReference Include="..\S2Dent.Services\S2Dent.Services.csproj" />
+    <ProjectReference Include="..\S2DentViewModels\S2Dent.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

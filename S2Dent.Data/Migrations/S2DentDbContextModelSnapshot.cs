@@ -208,8 +208,8 @@ namespace S2Dent.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -288,8 +288,8 @@ namespace S2Dent.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -394,6 +394,9 @@ namespace S2Dent.Data.Migrations
 
                     b.Property<string>("InsuranceCompanyId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("InsuranceLimit")
+                        .HasColumnType("float");
 
                     b.Property<string>("MedicalBookNumber")
                         .IsRequired()

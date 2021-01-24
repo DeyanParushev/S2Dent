@@ -10,7 +10,7 @@ using S2Dent.Data;
 namespace S2Dent.Data.Migrations
 {
     [DbContext(typeof(S2DentDbContext))]
-    [Migration("20210123151815_InitialCreate")]
+    [Migration("20210124085302_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -210,8 +210,8 @@ namespace S2Dent.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -290,8 +290,8 @@ namespace S2Dent.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -396,6 +396,9 @@ namespace S2Dent.Data.Migrations
 
                     b.Property<string>("InsuranceCompanyId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("InsuranceLimit")
+                        .HasColumnType("float");
 
                     b.Property<string>("MedicalBookNumber")
                         .IsRequired()

@@ -1,5 +1,7 @@
 namespace S2Dent.MVC
 {
+    using System.Reflection;
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -7,8 +9,12 @@ namespace S2Dent.MVC
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+   
     using S2Dent.Data;
+    using S2Dent.DTOs;
     using S2Dent.Models;
+    using S2Dent.MVC.Pages;
+    using S2Dent.Services.Automapper;
 
     public class Startup
     {
@@ -35,13 +41,19 @@ namespace S2Dent.MVC
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             })
                 .AddRazorRuntimeCompilation();
-            
+
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddRazorPages();
         }
 
         //// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorModel).GetTypeInfo().Assembly,
+                typeof(DoctorDTO).GetTypeInfo().Assembly);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,6 +76,9 @@ namespace S2Dent.MVC
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

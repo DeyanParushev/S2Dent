@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\S2Dent.Models\S2Dent.Models.csproj" />
+    <ProjectReference Include="..\S2Dent.Services\S2Dent.Services.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,9 +1,8 @@
-﻿namespace S2Dent.Data.Migrations
-{
-    using System;
-   
-    using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
+namespace S2Dent.Data.Migrations
+{
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +45,7 @@
                     MiddleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ThirdName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -77,7 +76,7 @@
                     MiddleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ThirdName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -257,7 +256,8 @@
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedicalBookNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AdditionalInsurance = table.Column<bool>(type: "bit", nullable: false),
-                    InsuranceCompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    InsuranceCompanyId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    InsuranceLimit = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
