@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,8 +38,8 @@
                 </div>
             </div>
             <select class="custom-select-sm">
-                <option value="English"><a asp-controller="Home" asp-action="Index-En">En</a></option>
-                <option value="Bulgarian"><a asp-controller="Home" asp-action="Index-Bg">En</a></option>
+                <option value="en-Us"><a asp-controller="Home" asp-action="Index">En</a></option>
+                <option value="bg-BG"><a asp-controller="Home" asp-action="Index">Bg</a></option>
             </select>
         </nav>
     </header>

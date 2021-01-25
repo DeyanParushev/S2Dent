@@ -1,4 +1,12 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function changeLanguageHeader() {
+    var http = new XMLHttpRequest();
+    var element = document.querySelector("body header nav select");
+    element.addEventListener("change", (event) => {
+        http.open('GET', window.location.href);
+        http.setRequestHeader("Accept-Language", element.value);
+        http.send();
+        
+    });
+}
 
-// Write your JavaScript code.
+changeLanguageHeader();

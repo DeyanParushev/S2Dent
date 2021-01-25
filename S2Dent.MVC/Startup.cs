@@ -1,6 +1,7 @@
 namespace S2Dent.MVC
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
     using AutoMapper;
     using Microsoft.AspNetCore.Authentication;
@@ -8,12 +9,14 @@ namespace S2Dent.MVC
     using Microsoft.AspNetCore.CookiePolicy;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-   
+
     using S2Dent.Data;
     using S2Dent.DTOs;
     using S2Dent.Models;
@@ -51,10 +54,13 @@ namespace S2Dent.MVC
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
-                //options.HttpOnly = HttpOnlyPolicy.Always;
+                options.HttpOnly = HttpOnlyPolicy.Always;
                 options.ConsentCookie.Expiration = DateTime.UtcNow.AddDays(3) - DateTime.UtcNow;
             });
-
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
 
             services.AddRazorPages();
         }
@@ -65,6 +71,23 @@ namespace S2Dent.MVC
             AutoMapperConfig.RegisterMappings(
                 typeof(ErrorModel).GetTypeInfo().Assembly,
                 typeof(DoctorDTO).GetTypeInfo().Assembly);
+
+            var supportedCultures = new[] { "bg-Bg", "en-Us" };
+            var localizationOptions =
+                new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            localizationOptions.RequestCultureProviders =
+                new List<IRequestCultureProvider>
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider(),
+                    new AcceptLanguageHeaderRequestCultureProvider(),
+                };
+
+            app.UseRequestLocalization(localizationOptions);
 
             if (env.IsDevelopment())
             {
