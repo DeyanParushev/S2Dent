@@ -2,6 +2,7 @@ namespace S2Dent.MVC
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Reflection;
     using AutoMapper;
     using Microsoft.AspNetCore.Authentication;
@@ -16,7 +17,7 @@ namespace S2Dent.MVC
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    using Microsoft.Extensions.Options;
     using S2Dent.Data;
     using S2Dent.DTOs;
     using S2Dent.Models;
@@ -61,6 +62,17 @@ namespace S2Dent.MVC
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("bg")
+                };
+                options.DefaultRequestCulture = new RequestCulture("bg");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            }); 
 
             services.AddRazorPages();
         }
@@ -72,22 +84,7 @@ namespace S2Dent.MVC
                 typeof(ErrorModel).GetTypeInfo().Assembly,
                 typeof(DoctorDTO).GetTypeInfo().Assembly);
 
-            var supportedCultures = new[] { "bg-Bg", "en-Us" };
-            var localizationOptions =
-                new RequestLocalizationOptions()
-                .SetDefaultCulture(supportedCultures[0])
-                .AddSupportedCultures(supportedCultures)
-                .AddSupportedUICultures(supportedCultures);
-
-            localizationOptions.RequestCultureProviders =
-                new List<IRequestCultureProvider>
-                {
-                    new QueryStringRequestCultureProvider(),
-                    new CookieRequestCultureProvider(),
-                    new AcceptLanguageHeaderRequestCultureProvider(),
-                };
-
-            app.UseRequestLocalization(localizationOptions);
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             if (env.IsDevelopment())
             {

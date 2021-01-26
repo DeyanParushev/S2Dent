@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "S2Dent.Services", "S2Dent.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "S2Dent.MVC", "S2Dent.MVC\S2Dent.MVC.csproj", "{70AA0E3C-46F5-4D55-9DFA-0B6EA378F7A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S2Dent.DTOs", "S2Dent.DTOs\S2Dent.DTOs.csproj", "{E6F657C7-3019-4C53-AA4A-9FADA789EE16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "S2Dent.DTOs", "S2Dent.DTOs\S2Dent.DTOs.csproj", "{E6F657C7-3019-4C53-AA4A-9FADA789EE16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S2Dent.ViewModels", "S2DentViewModels\S2Dent.ViewModels.csproj", "{B347A750-E242-41A8-9D2E-36708119D3C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "S2Dent.ViewModels", "S2DentViewModels\S2Dent.ViewModels.csproj", "{B347A750-E242-41A8-9D2E-36708119D3C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
