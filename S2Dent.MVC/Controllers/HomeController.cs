@@ -12,7 +12,7 @@
             return this.View();
         }
 
-        public IActionResult About()
+        public IActionResult Contacts()
         {
             return this.View();
         }

@@ -1,20 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+
+@{
+    var pageName = ViewContext.RouteData.Values["action"].ToString();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - S2Dent.MVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>S2Dent - @Localizer.GetString(pageName)</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-primary bg-light border-bottom box-shadow mb-3">
+    <header class="m-0">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-primary bg-white border-bottom box-shadow">
             <div class="container justify-content-between">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">S2Dent</a>
+                <a class="navbar-brand text-info col-sm-2" asp-controller="Home" asp-action="Index">
+                    <img src="~/pictures/resources/Logo/s2dent.png" class="img-fluid" />
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,26 +27,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-action="Index">Home</a>
+                            <a class="nav-link text-primary" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Doctors" asp-action="Doctors">Doctors</a>
+                            <a class="nav-link text-primary" asp-controller="Doctors" asp-action="All">@Localizer["Team"]</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Services"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Testimonials"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Gallery"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["News"]</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
-                <partial name="_CultureSettingPartial" />
             </div>
-           
+            <partial name="_CultureSettingPartial" />
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid bg-light p-0 m-auto m-0">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
@@ -50,7 +63,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - S2Dent - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - S2Dent - <a asp-area="" asp-page="/Privacy">@Localizer["Privacy"]</a>
         </div>
     </footer>
 

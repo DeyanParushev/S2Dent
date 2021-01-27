@@ -23,8 +23,8 @@
 
 <div>
     <form asp-controller="Home" asp-action="CultureManagment" method="post" asp-route-returnUrl="@returnUrl">
-        <select name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList" onchange="this.form.submit();">
-            <option value="value">text</option>
+        <select name="culture" asp-for="@culture.RequestCulture.UICulture.Name" 
+                asp-items="cultureList" onchange="this.form.submit();" class="form-control-sm">
         </select>
     </form>
 </div>

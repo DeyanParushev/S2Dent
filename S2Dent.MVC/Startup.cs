@@ -4,8 +4,8 @@ namespace S2Dent.MVC
     using System.Collections.Generic;
     using System.Globalization;
     using System.Reflection;
+   
     using AutoMapper;
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
     using Microsoft.AspNetCore.Hosting;
@@ -18,6 +18,7 @@ namespace S2Dent.MVC
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
+   
     using S2Dent.Data;
     using S2Dent.DTOs;
     using S2Dent.Models;
