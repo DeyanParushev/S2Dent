@@ -23,7 +23,9 @@ namespace S2Dent.MVC
     using S2Dent.DTOs;
     using S2Dent.Models;
     using S2Dent.MVC.Pages;
+    using S2Dent.Services;
     using S2Dent.Services.Automapper;
+    using S2Dent.Services.Interfaces;
 
     public class Startup
     {
@@ -63,6 +65,7 @@ namespace S2Dent.MVC
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new List<CultureInfo>
@@ -73,7 +76,9 @@ namespace S2Dent.MVC
                 options.DefaultRequestCulture = new RequestCulture("bg");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
-            }); 
+            });
+
+            services.AddTransient<IDoctorsService, DoctorsService>();
 
             services.AddRazorPages();
         }
