@@ -18,7 +18,7 @@
     var returnUrl = 
         string.IsNullOrWhiteSpace(Context.Request.Path) ?
         "~/" : 
-        $"{Context.Request.Path.Value}{Context.Request.QueryString}";
+        $"{this.Context.Request.Path.Value}{Context.Request.QueryString}";
 }
 
 <div>

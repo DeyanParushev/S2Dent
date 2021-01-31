@@ -1,9 +1,10 @@
 ﻿namespace S2Dent.MVC.Controllers
 {
+    using System;
+    
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
-    using System;
 
     public class HomeController : Controller
     {
@@ -26,8 +27,10 @@
         public IActionResult CultureManagment(string culture, string returnUrl)
         {
             var cookieName = CookieRequestCultureProvider.DefaultCookieName;
-            var cookieOptions = new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) };
-            Response.Cookies.Append(cookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), cookieOptions);
+            var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture));
+            var cookieOptions = new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30), IsEssential = true, Path = "/" };
+
+            this.Response.Cookies.Append(cookieName, cookieValue, cookieOptions);
 
             return this.Redirect(returnUrl);
         }

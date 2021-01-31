@@ -22,7 +22,8 @@
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function (event) {
                 var consentCookie = button.dataset.cookieString;
-                document.cookie = consentCookie;
+                console.log(consentCookie);
+                document.cookie += consentCookie;
             }, true);
         })();
     </script>
