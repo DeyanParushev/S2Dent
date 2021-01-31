@@ -11,7 +11,7 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show col-lg-6 m-auto" role="alert">
         @Localizer["Message"] <a asp-controller="Home" asp-action="Privacy">Learn More</a>.
         <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
             <span aria-hidden="true">@Localizer["Button"]</span>
@@ -21,8 +21,8 @@
         (function () {
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function (event) {
-                var cookie = button.dataset.cookieString;
-                document.cookie = cookie;
+                var consentCookie = button.dataset.cookieString;
+                document.cookie = consentCookie;
             }, true);
         })();
     </script>

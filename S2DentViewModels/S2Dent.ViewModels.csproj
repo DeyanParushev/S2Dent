@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\S2Dent.DTOs\S2Dent.DTOs.csproj" />
+    <ProjectReference Include="..\S2Dent.Services\S2Dent.Services.csproj" />
+  </ItemGroup>
+
 </Project>

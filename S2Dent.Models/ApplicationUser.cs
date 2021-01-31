@@ -15,15 +15,15 @@
         }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string MiddleName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string ThirdName { get; set; }
 
         public string Description { get; set; }

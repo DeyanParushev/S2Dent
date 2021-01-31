@@ -117,22 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionIsTooLong" xml:space="preserve">
-    <value>Описанието е над позволената дължина.</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="FiledIsNull" xml:space="preserve">
-    <value>Полето не може да бъде празно.</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="InvalidEmail" xml:space="preserve">
-    <value>Невалиден имейл.</value>
+  <data name="Doctors" xml:space="preserve">
+    <value>Doctors</value>
   </data>
-  <data name="NameIsNull" xml:space="preserve">
-    <value>Моля попълнете име.</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="NameIsTooLong" xml:space="preserve">
-    <value>Името не може да е с дължина над 20 символа.</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="Required" xml:space="preserve">
-    <value>Полето е задължително.</value>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Picture</value>
   </data>
 </root>

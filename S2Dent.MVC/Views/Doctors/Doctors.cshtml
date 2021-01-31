@@ -1,0 +1,75 @@
+﻿@model IEnumerable<S2Dent.ViewModels.ViewModels.DoctorViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = this.ViewContext.RouteData.Values["action"].ToString();
+}
+
+<h1>@Localizer["Doctors"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Localizer["Picture"]
+            </th>
+            <th>
+                @Localizer["FirsName"]
+            </th>
+            <th>
+                @Localizer["MiddleName"]
+            </th>
+            <th>
+                @Localizer["LastName"]
+            </th>
+            <th>
+                @Localizer["Email"]
+            </th>
+            <th>
+                @Localizer["Specialty"]
+            </th>
+            <th>
+                @Localizer["Description"]
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@doctor.PuctureUrl" class="" />
+                </td>
+                <td>
+                    @doctor.FirstName
+                </td>
+                <td>
+                    @doctor.MiddleName
+                </td>
+                <td>
+                    @doctor.LastName
+                </td>
+                <td>
+                    @doctor.Email
+                </td>
+                <td>
+                    @doctor.Specialty
+                </td>
+                <td>
+                    @doctor.Description
+                </td>
+                <td>
+                    @doctor.PuctureUrl
+                </td>
+                <td>
+                    <a asp-controller="Doctors" asp-action="Edit" asp-route-doctorId="@doctor.Id">@Localizer["Edit"]</a>
+                    <a asp-controller="Doctors" asp-action="Delete" asp-route-doctorId="@doctor.Id">@Localizer["Delete"]</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a asp-action="Create" class="btn btn-primary offset-lg-4 col-lg-4">@Localizer["Create"]</a>
+</p>

@@ -4,6 +4,7 @@
 @{
     var pageName = ViewContext.RouteData.Values["action"].ToString();
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,10 +28,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-action="Index">@Localizer["Home"]</a>
+                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Doctors" asp-action="All">@Localizer["Team"]</a>
+                            <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Team">@Localizer["Team"]</a>
                         </li>
                         <li>
                             <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Services"]</a>

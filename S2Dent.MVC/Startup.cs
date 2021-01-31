@@ -26,6 +26,7 @@ namespace S2Dent.MVC
     using S2Dent.Services;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
+    using S2Dent.ViewModels.ViewModels;
 
     public class Startup
     {
@@ -88,6 +89,7 @@ namespace S2Dent.MVC
         {
             AutoMapperConfig.RegisterMappings(
                 typeof(ErrorModel).GetTypeInfo().Assembly,
+                typeof(DoctorViewModel).GetTypeInfo().Assembly,
                 typeof(DoctorDTO).GetTypeInfo().Assembly);
 
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -100,7 +102,6 @@ namespace S2Dent.MVC
             else
             {
                 app.UseExceptionHandler("/Error");
-                //// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
