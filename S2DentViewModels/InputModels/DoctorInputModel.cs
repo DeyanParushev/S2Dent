@@ -23,7 +23,7 @@
         public string LastName { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(String))]
-        [StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(String))]
+        [StringLength(100, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(String))]
         public string Specialty { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(String))]

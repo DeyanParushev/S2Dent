@@ -1,6 +1,5 @@
 ﻿namespace S2Dent.DTOs
 {
-    using System;
     using System.Collections.Generic;
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
@@ -17,7 +16,7 @@
 
         public string Specialty { get; set; }
 
-        public string Picture { get; set; }
+        public string PictureUrl { get; set; }
 
         public ICollection<TreatmentDTO> Treatments { get; set; }
     }

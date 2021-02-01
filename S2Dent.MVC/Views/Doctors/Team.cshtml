@@ -1,2 +1,28 @@
 ﻿@model IEnumerable<S2Dent.ViewModels.ViewModels.DoctorViewModel>
-    <h1>Team</h1>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<h3>@Localizer["TeamHeader"]</h3>
+
+@foreach (var doctor in Model)
+{
+    int counter = 0;
+    <div class="container-fluid p-lg-4 p-md-2 p-sm-1 m-0">
+        <div class="m-0 d-md-flex flex-sm-column">
+            @if (counter % 2 == 0)
+            {
+                <span class="img-fluid"><img src="@doctor.PuctureUrl" /></span>
+                <p>
+                    @doctor.Description
+                </p>
+            }
+            else
+            {
+                <p>
+                    @doctor.Description
+                </p>
+                <span class="img-fluid"><img src="@doctor.PuctureUrl" /></span>
+            }
+        </div>
+    </div>
+}

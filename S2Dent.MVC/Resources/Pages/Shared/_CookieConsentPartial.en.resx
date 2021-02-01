@@ -120,6 +120,9 @@
   <data name="Button" xml:space="preserve">
     <value>Accept</value>
   </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn More</value>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>For improving our services this site is using cookies.</value>
   </data>

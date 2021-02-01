@@ -120,6 +120,9 @@
   <data name="Button" xml:space="preserve">
     <value>Приемам</value>
   </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Научете повече</value>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>За да подобрим нашите услуги, този сайт използва бисквитки.</value>
   </data>

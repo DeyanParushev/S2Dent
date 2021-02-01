@@ -2,7 +2,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    var pageName = ViewContext.RouteData.Values["action"].ToString();
+    var pageName = ViewContext.RouteData.Values["action"]?.ToString();
 }
 
 <!DOCTYPE html>
@@ -34,19 +34,19 @@
                             <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Team">@Localizer["Team"]</a>
                         </li>
                         <li>
-                            <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Services"]</a>
+                            <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Team"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Testimonials"]</a>
+                            <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Services"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Gallery"]</a>
+                            <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Testimonials"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
+                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Gallery"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["News"]</a>
+                            <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["Contacts"]</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -58,13 +58,13 @@
     <div class="container-fluid bg-light p-0 m-auto m-0">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
-            @RenderBody()
+            @CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - S2Dent - <a asp-area="" asp-page="/Privacy">@Localizer["Privacy"]</a>
+            &copy; @DagHelper.Name = "_LoginPartial" - S2Dent - <a asp-area="" asp-page="/Privacy">@Localizer["Privacy"]</a>
         </div>
     </footer>
 
@@ -72,6 +72,51 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
+    __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Name = "_CookieConsentPartial";
+    await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+#nullable restore
+#line 62 "C:\Users\dparu\Desktop\S2Dent\S2Dent\S2Dent.MVC\Pages\Shared\_Layout.cshtml"
+    __o = RenderBody();
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 68 "C:\Users\dparu\Desktop\S2Dent\S2Dent\S2Dent.MVC\Pages\Shared\_Layout.cshtml"
+    __o = DateTime.Now.Year;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 68 "C:\Users\dparu\Desktop\S2Dent\S2Dent\S2Dent.MVC\Pages\Shared\_Layout.cshtml"
+    __o = Localizer["Privacy"];
+
+#line default
+#line hidden
+#nullable disable
+    __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper>();
+    __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Area = "";
+    __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Page = "/Privacy";
+    await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+    __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+    await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+    __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+    await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+    __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
+    __Microsoft_AspNetCore_Mvc_TagHelpers_ScriptTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper>();
+    __Microsoft_AspNetCore_Mvc_TagHelpers_ScriptTagHelper.Src = "~/js/site.js";
+#nullable restore
+#line 74 "C:\Users\dparu\Desktop\S2Dent\S2Dent\S2Dent.MVC\Pages\Shared\_Layout.cshtml"
+    __Microsoft_AspNetCore_Mvc_TagHelpers_ScriptTagHelper.AppendVersion = true;
+
+#line default
+#line hidden
+#nullable disable
+    await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+#nullable restore
+#line 76 "C:\Users\dparu\Desktop\S2Dent\S2Dent\S2Dent.MVC\Pages\Shared\_Layout.cshtml"
+    __o = await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
