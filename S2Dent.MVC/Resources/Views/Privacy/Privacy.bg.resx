@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonAccept" xml:space="preserve">
-    <value>Accept</value>
-  </data>
   <data name="ButtonDecline" xml:space="preserve">
-    <value>Decline cookies</value>
+    <value>Откажи бисквитки.</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Поверителност</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Learn More</value>
+    <value>НаучетеПовече</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>For improving our services this site is using cookies.</value>
+    <value>Този сайт използва бисквитки.</value>
   </data>
 </root>

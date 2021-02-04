@@ -1,1 +1,29 @@
-﻿<h1>Hello Privacy</h1>
+﻿@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+    var returnUrl =
+    string.IsNullOrWhiteSpace(Context.Request.Path) ?
+    "~/" :
+    $"{this.Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+<h1 class="my-lg-3 my-md-2 my-sm-1 text-center">@Localizer["Header"]</h1>
+
+@if (!showBanner)
+{
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show col-lg-6 col-md-4 col-sm-2 m-auto" role="alert">
+        @Localizer["Message"] <a asp-controller="Home" asp-action="Privacy">@Localizer["LearnMore"]</a>.
+
+        <form style="display:inline" asp-controller="Privacy" asp-action="OnPostWithdraw" asp-route-returnUrl="@returnUrl" method="post">
+            <button type="button" onclick="this.form.submit()" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                <span aria-hidden="true">@Localizer["ButtonDecline"]</span>
+            </button>
+        </form>
+    </div>
+}

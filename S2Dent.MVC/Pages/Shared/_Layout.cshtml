@@ -56,15 +56,17 @@
         </nav>
     </header>
     <div class="container-fluid bg-light p-0 m-auto m-0">
-        <partial name="_CookieConsentPartial" />
+
         <main role="main" class="pb-3">
             @RenderBody();
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
+        <partial name="_CookieConsentPartial" />
+
         <div class="container">
-            &copy; @DateTime.Now.Year - S2Dent - <a asp-area="" asp-page="/Privacy">@Localizer["Privacy"]</a>
+            &copy; @DateTime.Now.Year - S2Dent - <a asp-controller="Privacy" asp-action="Privacy">@Localizer["Privacy"]</a>
         </div>
     </footer>
 

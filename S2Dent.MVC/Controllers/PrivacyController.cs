@@ -5,6 +5,11 @@
 
     public class PrivacyController : Controller
     {
+        public IActionResult Privacy()
+        {
+            return this.View();
+        }
+
         public IActionResult OnPostGive(string returnUrl)
         {
             this.HttpContext.Features.Get<ITrackingConsentFeature>().GrantConsent();

@@ -20,8 +20,9 @@
 
         <form style="display:inline" asp-controller="Privacy" asp-action="OnPostGive" asp-route-returnUrl="@returnUrl" method="post">
             <button type="button" onclick="this.form.submit()" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-                <span aria-hidden="true">@Localizer["Button"]</span>
+                <span aria-hidden="true">@Localizer["ButtonAccept"]</span>
             </button>
         </form>
     </div>
 }
+

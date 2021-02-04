@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button" xml:space="preserve">
+  <data name="ButtonAccept" xml:space="preserve">
     <value>Приемам</value>
+  </data>
+  <data name="ButtonDecline" xml:space="preserve">
+    <value>Отказване от бисквитки</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
     <value>Научете повече</value>
