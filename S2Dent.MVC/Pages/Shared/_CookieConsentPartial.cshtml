@@ -5,26 +5,23 @@
 
 @{
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
-    var showBanner = !consentFeature?.CanTrack ?? true;
-    var cookieString = consentFeature.CreateConsentCookie();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+    var returnUrl =
+    string.IsNullOrWhiteSpace(Context.Request.Path) ?
+    "~/" :
+    $"{this.Context.Request.Path.Value}{Context.Request.QueryString}";
 }
 
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show col-lg-6 col-md-4 col-sm-2 m-auto" role="alert">
         @Localizer["Message"] <a asp-controller="Home" asp-action="Privacy">@Localizer["LearnMore"]</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">@Localizer["Button"]</span>
-        </button>
+
+        <form style="display:inline" asp-controller="Privacy" asp-action="OnPostGive" asp-route-returnUrl="@returnUrl" method="post">
+            <button type="button" onclick="this.form.submit()" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                <span aria-hidden="true">@Localizer["Button"]</span>
+            </button>
+        </form>
     </div>
-    <script>
-        (function () {
-            var button = document.querySelector("#cookieConsent button[data-cookie-string]");
-            button.addEventListener("click", function (event) {
-                var consentCookie = button.dataset.cookieString;
-                console.log(consentCookie);
-                document.cookie = consentCookie;
-            }, false);
-        })();
-    </script>
 }
