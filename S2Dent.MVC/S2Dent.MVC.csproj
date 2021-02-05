@@ -39,4 +39,14 @@
     <None Include="Pages\Shared\_CookieConsentPartial.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ViewModels\InputModels\DoctorInputModel.bg.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Controllers\" />
+  </ItemGroup>
+
 </Project>

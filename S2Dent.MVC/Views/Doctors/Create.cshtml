@@ -6,11 +6,10 @@
 
 <h1>Create</h1>
 
-<h4>DoctorInputModel</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4">
-        <form asp-action="CreateDoctor">
+        <form asp-controller="Doctors" asp-action="CreateDoctor">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -52,15 +51,16 @@
                 <label class="custom-file-label" for="customFile">Choose file</label>
                 <span asp-validation-for="ProfilePicture" class="text-danger"></span>
             </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary mx-auto col-sm-2" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-controller="Doctors" asp-action="Doctors">Back to List</a>
+<div class="container">
+    <a class="btn btn-outline-primary" asp-controller="Doctors" asp-action="Doctors">Back</a>
 </div>
 
 @section Scripts {
