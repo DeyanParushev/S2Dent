@@ -10,7 +10,7 @@ using S2Dent.Data;
 namespace S2Dent.Data.Migrations
 {
     [DbContext(typeof(S2DentDbContext))]
-    [Migration("20210201102305_InitialCreate")]
+    [Migration("20210305072949_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
