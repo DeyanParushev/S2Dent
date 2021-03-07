@@ -5,7 +5,7 @@
    
     using S2Dent.Models;
 
-    public class S2DentDbContext : IdentityDbContext<Doctor, ApplicationRole, string>
+    public class S2DentDbContext : IdentityDbContext<DoctorDTO, ApplicationRole, string>
     {
         public S2DentDbContext()
         {
@@ -16,7 +16,7 @@
         {
         }
 
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<DoctorDTO> Doctors { get; set; }
 
         public DbSet<Assisstant> Assisstants { get; set; }
 

@@ -8,7 +8,7 @@
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
 
-    public class DoctorInputModel : IMapFrom<Doctor>, IMapTo<Doctor>
+    public class DoctorInputModel : IMapFrom<DoctorDTO>, IMapTo<DoctorDTO>
     {
         [Required]
         //[StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(ResourceSet))]
@@ -38,5 +38,7 @@
         public string Email { get; set; }
 
         public IFormFile ProfilePicture { get; set; }
+
+        public string Password { get; set; }
     }
 }

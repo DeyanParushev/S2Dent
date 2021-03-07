@@ -3,7 +3,7 @@
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
 
-    public class DoctorViewModel : IMapFrom<Doctor>, IMapTo<Doctor>
+    public class DoctorViewModel : IMapFrom<DoctorDTO>, IMapTo<DoctorDTO>
     {
         public string Id { get; set; }
 
