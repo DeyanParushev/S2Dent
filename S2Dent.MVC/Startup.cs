@@ -82,7 +82,7 @@ namespace S2Dent.MVC
             AutoMapperConfig.RegisterMappings(
                 typeof(ErrorModel).GetTypeInfo().Assembly,
                 typeof(DoctorViewModel).GetTypeInfo().Assembly,
-                typeof(DoctorDTO).GetTypeInfo().Assembly);
+                typeof(DTOs.DoctorDTO).GetTypeInfo().Assembly);
 
             app.SeedRoles();
 

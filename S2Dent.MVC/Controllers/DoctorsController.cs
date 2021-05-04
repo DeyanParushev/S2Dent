@@ -2,9 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    
+    using S2Dent.DTOs;
     using S2Dent.MVC.Areas.Identity;
     using S2Dent.Services.Interfaces;
     using S2Dent.ViewModels.InputModels;
@@ -13,10 +14,12 @@
     public class DoctorsController : Controller
     {
         private readonly IDoctorsService doctorsService;
+        private readonly IMapper mapper;
 
-        public DoctorsController(IDoctorsService doctorsService)
+        public DoctorsController(IDoctorsService doctorsService, IMapper mapper)
         {
             this.doctorsService = doctorsService;
+            this.mapper = mapper;
         }
 
         [Route("/Team")]
@@ -57,10 +60,16 @@
 
         [HttpPost]
         //[Authorize(Roles = IdentityRoles.SiteAdmin)]
-        public async Task<IActionResult> CreateDoctor()
+        public async Task<IActionResult> CreateDoctor(DoctorInputModel inputDoctor)
         {
-            var doctor = new DoctorInputModel();
-            return this.View(doctor);
+            if(!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.Create));
+            }
+
+            var doctor = this.mapper.Map<DoctorDTO>(inputDoctor);
+            await this.doctorsService.CreateDoctor(doctor, inputDoctor.Password);
+            return this.Redirect("/Home");
         }
     }
 }

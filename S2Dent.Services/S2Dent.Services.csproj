@@ -5,15 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\S2Dent.Data\S2Dent.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Automapper\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\S2Dent.Data\S2Dent.Data.csproj" />
   </ItemGroup>
 
 </Project>
