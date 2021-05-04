@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using S2Dent.DTOs;
+    using S2Dent.Models;
     using S2Dent.MVC.Areas.Identity;
     using S2Dent.Services.Interfaces;
     using S2Dent.ViewModels.InputModels;
@@ -67,7 +68,7 @@
                 return this.RedirectToAction(nameof(this.Create));
             }
 
-            var doctor = this.mapper.Map<DoctorDTO>(inputDoctor);
+            var doctor = this.mapper.Map<Doctor>(inputDoctor);
             await this.doctorsService.CreateDoctor(doctor, inputDoctor.Password);
             return this.Redirect("/Home");
         }

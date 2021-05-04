@@ -1,5 +1,6 @@
 ﻿namespace S2Dent.ViewModels.ViewModels
 {
+    using S2Dent.DTOs;
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
 

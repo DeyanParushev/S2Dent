@@ -16,7 +16,7 @@
         {
         }
 
-        public DbSet<DoctorDTO> Doctors { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
 
         public DbSet<Assisstant> Assisstants { get; set; }
 

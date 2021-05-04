@@ -9,9 +9,9 @@
     using Microsoft.AspNetCore.Cryptography.KeyDerivation;
     
     using S2Dent.Data;
-    using S2Dent.DTOs;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
+    using S2Dent.Models;
 
     public class DoctorsService : IDoctorsService
     {
@@ -44,14 +44,14 @@
             return doctor;
         }
 
-        public async Task CreateDoctor(DoctorDTO doctor, string password)
+        public async Task CreateDoctor(Doctor doctor, string password)
         {
             doctor.PasswordHash = this.GetHashedPassword(password);
             this.dbContext.Doctors.Add(doctor);
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateDoctor(DoctorDTO inputDoctor)
+        public async Task UpdateDoctor(Doctor inputDoctor)
         {
             this.CheckDoctorExists(inputDoctor.Id);
 

@@ -4,7 +4,7 @@
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
 
-    public class DoctorDTO : IMapFrom<Models.DoctorDTO>, IMapTo<Models.DoctorDTO>
+    public class DoctorDTO : IMapFrom<Doctor>, IMapTo<Doctor>
     {
         public string Id { get; set; }
 

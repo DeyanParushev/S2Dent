@@ -1,11 +1,8 @@
 ﻿namespace S2Dent.ViewModels.InputModels
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Resources;
     using Microsoft.AspNetCore.Http;
-    
-    using S2Dent.Models;
+    using S2Dent.DTOs;
     using S2Dent.Services.Automapper;
 
     public class DoctorInputModel : IMapFrom<DoctorDTO>, IMapTo<DoctorDTO>
