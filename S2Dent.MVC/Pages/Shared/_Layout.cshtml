@@ -1,16 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
-@{
-    var pageName = ViewContext.RouteData.Values["action"]?.ToString();
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>S2Dent - @Localizer.GetString(pageName)</title>
+    <title>S2Dent</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -27,27 +23,55 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Team">@Localizer["Team"]</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Team"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Services"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Testimonials"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Gallery"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["Contacts"]</a>
-                        </li>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Team">@Localizer["Team"]</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Services"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Testimonials"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Gallerry"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["News"]</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Doctors">@Localizer["Team"]</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-primary" asp-controller="Services" asp-action="Services">@Localizer["Services"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="Testimonials">@Localizer["Testimonials"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="Gallerry">@Localizer["Gallery"]</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="News" asp-action="News">@Localizer["News"]</a>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
+                            </li>*@
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -55,7 +79,7 @@
             <partial name="_CultureSettingPartial" />
         </nav>
     </header>
-    <div class="container-fluid bg-light p-0 m-auto m-0">
+    <div class="container bg-light p-0 m-auto m-0">
 
         <main role="main" class="pb-3">
             @RenderBody();

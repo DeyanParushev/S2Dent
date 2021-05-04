@@ -5,7 +5,7 @@
    
     using S2Dent.Models;
 
-    public class S2DentDbContext : IdentityDbContext<Doctor, ApplicationRole, string>
+    public class S2DentDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public S2DentDbContext()
         {

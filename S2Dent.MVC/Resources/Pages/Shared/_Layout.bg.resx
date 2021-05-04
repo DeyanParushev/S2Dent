@@ -126,11 +126,20 @@
   <data name="Home" xml:space="preserve">
     <value>Начало</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Изход</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>Новини</value>
   </data>
   <data name="Privacy" xml:space="preserve">
     <value>Поверителност</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Услуги</value>

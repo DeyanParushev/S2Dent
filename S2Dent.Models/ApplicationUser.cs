@@ -14,15 +14,12 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [Required]
         [MaxLength(20)]
         public string FirstName { get; set; }
-
-        [Required]
+        
         [MaxLength(20)]
         public string MiddleName { get; set; }
 
-        [Required]
         [MaxLength(20)]
         public string ThirdName { get; set; }
 

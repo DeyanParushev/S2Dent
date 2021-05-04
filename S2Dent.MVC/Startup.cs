@@ -4,7 +4,7 @@ namespace S2Dent.MVC
     using System.Collections.Generic;
     using System.Globalization;
     using System.Reflection;
-   
+
     using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
@@ -13,15 +13,13 @@ namespace S2Dent.MVC
     using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Razor;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
-   
-    using S2Dent.Data;
+
     using S2Dent.DTOs;
-    using S2Dent.Models;
+    using S2Dent.MVC.Extensions;
     using S2Dent.MVC.Pages;
     using S2Dent.Services;
     using S2Dent.Services.Automapper;
@@ -40,14 +38,8 @@ namespace S2Dent.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<S2DentDbContext>(options =>
-                options.UseSqlServer(
-                    this.Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<ApplicationRole>()
-                .AddEntityFrameworkStores<S2DentDbContext>();
-
+            services.SetupDbContext(this.Configuration);
+            
             services.AddControllersWithViews(configure =>
             {
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
@@ -91,6 +83,8 @@ namespace S2Dent.MVC
                 typeof(ErrorModel).GetTypeInfo().Assembly,
                 typeof(DoctorViewModel).GetTypeInfo().Assembly,
                 typeof(DoctorDTO).GetTypeInfo().Assembly);
+
+            app.SeedRoles();
 
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
