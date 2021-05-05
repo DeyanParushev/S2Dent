@@ -7,19 +7,19 @@
     {
         public IActionResult Privacy()
         {
-            return this.View();
+            return View();
         }
 
         public IActionResult OnPostGive(string returnUrl)
         {
-            this.HttpContext.Features.Get<ITrackingConsentFeature>().GrantConsent();
-            return this.Redirect(returnUrl);
+            HttpContext.Features.Get<ITrackingConsentFeature>().GrantConsent();
+            return Redirect(returnUrl);
         }
 
         public IActionResult OnPostWithdraw(string returnUrl)
         {
-            this.HttpContext.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
-            return this.Redirect(returnUrl);
+            HttpContext.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
+            return Redirect(returnUrl);
         }
     }
 }

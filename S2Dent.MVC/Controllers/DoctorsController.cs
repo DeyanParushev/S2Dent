@@ -19,22 +19,22 @@
 
         public DoctorsController(IDoctorsService doctorsService, IMapper mapper)
         {
-            this.doctorsService = doctorsService;
-            this.mapper = mapper;
+            doctorsService = doctorsService;
+            mapper = mapper;
         }
 
         [Route("/Team")]
         public async Task<IActionResult> Team()
         {
-            var doctors = await this.doctorsService.GetAllDoctors<DoctorViewModel>();
-            return this.View(doctors);
+            var doctors = await doctorsService.GetAllDoctors<DoctorViewModel>();
+            return View(doctors);
         }
 
         //[Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Doctors()
         {
-            var doctors = await this.doctorsService.GetAllDoctors<DoctorViewModel>();
-            return this.View(doctors);
+            var doctors = await doctorsService.GetAllDoctors<DoctorViewModel>();
+            return View(doctors);
         }
 
         //[Authorize(Roles = IdentityRoles.SiteAdmin)]
@@ -42,13 +42,13 @@
         {
             try
             {
-                var doctor = this.doctorsService.GetDoctorById<DoctorViewModel>(id);
-                return this.View(doctor);
+                var doctor = doctorsService.GetDoctorById<DoctorViewModel>(id);
+                return View(doctor);
             }
             catch(Exception ex)
             {
-                this.ModelState.AddModelError(null, ex.Message);
-                return this.Redirect(this.HttpContext.Request.Path);
+                ModelState.AddModelError(null, ex.Message);
+                return Redirect(HttpContext.Request.Path);
             }
         }
 
@@ -56,21 +56,21 @@
         public async Task<IActionResult> Create()
         {
             var doctor = new DoctorInputModel();
-            return this.View(doctor);
+            return View(doctor);
         }
 
         [HttpPost]
         //[Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> CreateDoctor(DoctorInputModel inputDoctor)
         {
-            if(!this.ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.Create));
+                return RedirectToAction(nameof(Create));
             }
 
-            var doctor = this.mapper.Map<Doctor>(inputDoctor);
-            await this.doctorsService.CreateDoctor(doctor, inputDoctor.Password);
-            return this.Redirect("/Home");
+            var doctor = mapper.Map<Doctor>(inputDoctor);
+            await doctorsService.CreateDoctor(doctor, inputDoctor.Password);
+            return Redirect("/Home");
         }
     }
 }

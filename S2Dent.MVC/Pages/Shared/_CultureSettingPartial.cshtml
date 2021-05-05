@@ -18,13 +18,13 @@
     var returnUrl = 
         string.IsNullOrWhiteSpace(Context.Request.Path) ?
         "~/" : 
-        $"{this.Context.Request.Path.Value}{Context.Request.QueryString}";
+        $"{Context.Request.Path.Value}{Context.Request.QueryString}";
 }
 
 <div>
     <form asp-controller="Home" asp-action="CultureManagment" method="post" asp-route-returnUrl="@returnUrl">
         <select name="culture" asp-for="@culture.RequestCulture.UICulture.Name" 
-                asp-items="cultureList" onchange="this.form.submit();" class="form-control-sm">
+                asp-items="cultureList" onchange="form.submit();" class="form-control-sm">
         </select>
     </form>
 </div>

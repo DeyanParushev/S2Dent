@@ -8,8 +8,8 @@
         public Assisstant()
             : base()
         {
-            this.Id = Guid.NewGuid().ToString();
-            this.DoctorsAssistants = new HashSet<DoctorAssisstant>();
+            Id = Guid.NewGuid().ToString();
+            DoctorsAssistants = new HashSet<DoctorAssisstant>();
         }
     }
 }

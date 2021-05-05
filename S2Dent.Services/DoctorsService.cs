@@ -19,12 +19,12 @@
 
         public DoctorsService(S2DentDbContext context)
         {
-            this.dbContext = context;
+            dbContext = context;
         }
 
         public async Task<ICollection<T>> GetAllDoctors<T>()
         {
-            var doctors = this.dbContext.Doctors
+            var doctors = dbContext.Doctors
                 .Where(x => x.IsDeleted == false)
                 .To<T>()
                 .ToHashSet();
@@ -34,9 +34,9 @@
 
         public async Task<T> GetDoctorById<T>(string id)
         {
-            this.CheckDoctorExists(id);
+            CheckDoctorExists(id);
 
-            var doctor = this.dbContext.Doctors
+            var doctor = dbContext.Doctors
                         .Where(x => x.Id == id && x.IsDeleted == false)
                         .To<T>()
                         .SingleOrDefault();
@@ -46,26 +46,26 @@
 
         public async Task CreateDoctor(Doctor doctor, string password)
         {
-            doctor.PasswordHash = this.GetHashedPassword(password);
-            this.dbContext.Doctors.Add(doctor);
-            await this.dbContext.SaveChangesAsync();
+            doctor.PasswordHash = GetHashedPassword(password);
+            dbContext.Doctors.Add(doctor);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task UpdateDoctor(Doctor inputDoctor)
         {
-            this.CheckDoctorExists(inputDoctor.Id);
+            CheckDoctorExists(inputDoctor.Id);
 
-            this.dbContext.Doctors.Update(inputDoctor);
-            await this.dbContext.SaveChangesAsync();
+            dbContext.Doctors.Update(inputDoctor);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteDoctor(string id)
         {
-            this.CheckDoctorExists(id);
+            CheckDoctorExists(id);
 
-            var doctor = this.dbContext.Doctors.SingleOrDefault(x => x.Id == id);
+            var doctor = dbContext.Doctors.SingleOrDefault(x => x.Id == id);
             doctor.IsDeleted = true;
-            await this.dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
 
         private string GetHashedPassword(string password)
@@ -89,7 +89,7 @@
         
         private void CheckDoctorExists(string id)
         {
-            if (this.dbContext.Doctors.Any(x => x.Id == id && x.IsDeleted == false))
+            if (dbContext.Doctors.Any(x => x.Id == id && x.IsDeleted == false))
             {
                 throw new ArgumentException("Doctor does not exist.");
             }

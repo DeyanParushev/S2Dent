@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = this.ViewContext.RouteData.Values["action"].ToString();
+    ViewData["Title"] = ViewContext.RouteData.Values["action"].ToString();
 }
 
 <h1>@Localizer["Doctors"]</h1>

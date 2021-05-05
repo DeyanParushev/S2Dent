@@ -35,7 +35,7 @@ namespace S2Dent.MVC.Areas.Identity.Pages.Account
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            this.roleManager = roleManager;
+            roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
 
@@ -84,7 +84,7 @@ namespace S2Dent.MVC.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await this.AsignRoles(user);
+                    await AsignRoles(user);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -122,9 +122,9 @@ namespace S2Dent.MVC.Areas.Identity.Pages.Account
         {
             var roles = new string[] { IdentityRoles.Assisstant, IdentityRoles.Doctor, IdentityRoles.Patient, IdentityRoles.SiteAdmin };
 
-            if (this._userManager.Users.Count() <= 1)
+            if (_userManager.Users.Count() <= 1)
             {
-                await this._userManager.AddToRolesAsync(user, roles);
+                await _userManager.AddToRolesAsync(user, roles);
             }
         }
     }

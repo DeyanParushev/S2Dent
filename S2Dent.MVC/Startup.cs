@@ -30,7 +30,7 @@ namespace S2Dent.MVC
     {
         public Startup(IConfiguration configuration)
         {
-            this.Configuration = configuration;
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -38,7 +38,7 @@ namespace S2Dent.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.SetupDbContext(this.Configuration);
+            services.SetupDbContext(Configuration);
             
             services.AddControllersWithViews(configure =>
             {

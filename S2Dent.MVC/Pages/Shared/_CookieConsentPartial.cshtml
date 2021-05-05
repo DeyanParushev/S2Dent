@@ -10,7 +10,7 @@
     var returnUrl =
     string.IsNullOrWhiteSpace(Context.Request.Path) ?
     "~/" :
-    $"{this.Context.Request.Path.Value}{Context.Request.QueryString}";
+    $"{Context.Request.Path.Value}{Context.Request.QueryString}";
 }
 
 @if (showBanner)
@@ -19,7 +19,7 @@
         @Localizer["Message"] <a asp-controller="Home" asp-action="Privacy">@Localizer["LearnMore"]</a>.
 
         <form style="display:inline" asp-controller="Privacy" asp-action="OnPostGive" asp-route-returnUrl="@returnUrl" method="post">
-            <button type="button" onclick="this.form.submit()" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <button type="button" onclick="form.submit()" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
                 <span aria-hidden="true">@Localizer["ButtonAccept"]</span>
             </button>
         </form>

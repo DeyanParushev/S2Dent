@@ -11,7 +11,7 @@
         public ApplicationUser()
             : base()
         {
-            this.Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
         }
 
         [MaxLength(20)]

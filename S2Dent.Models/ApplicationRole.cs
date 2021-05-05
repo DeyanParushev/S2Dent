@@ -12,8 +12,8 @@
 
         public ApplicationRole(string name)
         {
-            this.Id = Guid.NewGuid().ToString();
-            this.Name = name;
+            Id = Guid.NewGuid().ToString();
+            Name = name;
         }
     }
 }

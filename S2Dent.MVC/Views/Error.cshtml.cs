@@ -14,16 +14,16 @@ namespace S2Dent.MVC.Pages
        
         public ErrorModel(ILogger<ErrorModel> logger)
         {
-            this.logger = logger;
+            logger = logger;
         }
 
         public string RequestId { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(this.RequestId);
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         public void OnGet()
         {
-            this.RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
 }

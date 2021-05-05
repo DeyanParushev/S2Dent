@@ -11,17 +11,17 @@
     {
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
 
         public IActionResult Contacts()
         {
-            return this.View();
+            return View();
         }
 
         public IActionResult Privacy()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
@@ -31,9 +31,9 @@
             var cookieValue = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture));
             var cookieOptions = new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30), IsEssential = true, Path = "/" };
 
-            this.Response.Cookies.Append(cookieName, cookieValue, cookieOptions);
+            Response.Cookies.Append(cookieName, cookieValue, cookieOptions);
 
-            return this.Redirect(returnUrl);
+            return Redirect(returnUrl);
         }
     }
 }
