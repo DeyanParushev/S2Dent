@@ -1,66 +1,67 @@
 ﻿@model S2Dent.ViewModels.InputModels.DoctorInputModel
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>@Localizer["Title"]</h1>
 
 <hr />
 <div class="row justify-content-center">
     <div class="col-md-4">
-        <form asp-controller="Doctors" asp-action="CreateDoctor">
+        <form asp-controller="Doctors" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="control-label">@Localizer["FirstName"]</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
+                <label asp-for="MiddleName" class="control-label">@Localizer["MiddleName"]</label>
                 <input asp-for="MiddleName" class="form-control" />
                 <span asp-validation-for="MiddleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName" class="control-label">@Localizer["LastName"]</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Specialty" class="control-label"></label>
+                <label asp-for="Specialty" class="control-label">@Localizer["Speciality"]</label>
                 <input asp-for="Specialty" class="form-control" />
                 <span asp-validation-for="Specialty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">@Localizer["Description"]</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
+                <label asp-for="PhoneNumber" class="control-label">@Localizer["PhoneNumber"]</label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">@Localizer["Email"]</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="custom-file">
                 <input asp-for="ProfilePicture" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Choose file</label>
+                <label class="custom-file-label" for="customFile">@Localizer["Picture"]</label>
                 <span asp-validation-for="ProfilePicture" class="text-danger"></span>
             </div>
             <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary mx-auto col-sm-2" />
+                <input type="submit" value=@Localizer["Create"] class="btn btn-primary mx-auto col-sm-3" />
             </div>
         </form>
     </div>
 </div>
 
 <div class="container">
-    <a class="btn btn-outline-primary" asp-controller="Doctors" asp-action="Doctors">Back</a>
+    <a class="btn btn-outline-primary" asp-controller="Doctors" asp-action="Doctors">@Localizer["Back"]</a>
 </div>
 
 @section Scripts {

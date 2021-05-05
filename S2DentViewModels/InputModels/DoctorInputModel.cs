@@ -3,11 +3,12 @@
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Http;
     using S2Dent.DTOs;
+    using S2Dent.Models;
     using S2Dent.Services.Automapper;
 
-    public class DoctorInputModel : IMapFrom<DoctorDTO>, IMapTo<DoctorDTO>
+    public class DoctorInputModel : IMapFrom<Doctor>, IMapTo<Doctor>
     {
-        [Required]
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(DoctorInputModel))]
         //[StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(ResourceSet))]
         public string FirstName { get; set; }
 

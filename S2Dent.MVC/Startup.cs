@@ -19,6 +19,7 @@ namespace S2Dent.MVC
     using Microsoft.Extensions.Options;
 
     using S2Dent.DTOs;
+    using S2Dent.Models;
     using S2Dent.MVC.Extensions;
     using S2Dent.MVC.Pages;
     using S2Dent.Services;
@@ -57,7 +58,14 @@ namespace S2Dent.MVC
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(CommonResources).GetTypeInfo().Assembly.FullName);
+                        return factory.Create(nameof(CommonResources), assemblyName.Name);
+                    };
+                });
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -80,9 +88,10 @@ namespace S2Dent.MVC
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(
-                typeof(ErrorModel).GetTypeInfo().Assembly,
                 typeof(DoctorViewModel).GetTypeInfo().Assembly,
-                typeof(DTOs.DoctorDTO).GetTypeInfo().Assembly);
+                typeof(DoctorDTO).GetTypeInfo().Assembly,
+                typeof(Doctor).GetTypeInfo().Assembly);
+                
 
             app.SeedRoles();
 

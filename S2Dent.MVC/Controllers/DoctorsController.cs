@@ -19,8 +19,8 @@
 
         public DoctorsController(IDoctorsService doctorsService, IMapper mapper)
         {
-            doctorsService = doctorsService;
-            mapper = mapper;
+            this.doctorsService = doctorsService;
+            this.mapper = mapper;
         }
 
         [Route("/Team")]
@@ -30,14 +30,14 @@
             return View(doctors);
         }
 
-        //[Authorize(Roles = IdentityRoles.SiteAdmin)]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Doctors()
         {
             var doctors = await doctorsService.GetAllDoctors<DoctorViewModel>();
             return View(doctors);
         }
 
-        //[Authorize(Roles = IdentityRoles.SiteAdmin)]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> GetDoctor(string id)
         {
             try
@@ -52,7 +52,8 @@
             }
         }
 
-        //[Authorize(Roles = IdentityRoles.SiteAdmin)]
+        [HttpGet]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Create()
         {
             var doctor = new DoctorInputModel();
@@ -60,12 +61,12 @@
         }
 
         [HttpPost]
-        //[Authorize(Roles = IdentityRoles.SiteAdmin)]
-        public async Task<IActionResult> CreateDoctor(DoctorInputModel inputDoctor)
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
+        public async Task<IActionResult> Create(DoctorInputModel inputDoctor)
         {
             if(!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Create));
+                return this.View(inputDoctor);
             }
 
             var doctor = mapper.Map<Doctor>(inputDoctor);
