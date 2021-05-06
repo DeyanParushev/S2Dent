@@ -1,5 +1,9 @@
 ﻿namespace S2Dent.MVC.Extensions
 {
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -9,10 +13,6 @@
     using S2Dent.Data;
     using S2Dent.Models;
     using S2Dent.MVC.Areas.Identity;
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading.Tasks;
 
     public static class DbContextSetup
     {

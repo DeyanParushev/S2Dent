@@ -144,6 +144,9 @@
   <data name="Picture" xml:space="preserve">
     <value>Upload picture</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required Field</value>
+  </data>
   <data name="Speciality" xml:space="preserve">
     <value>Speciality</value>
   </data>

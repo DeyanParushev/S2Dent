@@ -144,6 +144,9 @@
   <data name="Picture" xml:space="preserve">
     <value>Качи снимка</value>
   </data>
+  <data name="Required" xml:space="preserve">
+    <value>Полето е задължително</value>
+  </data>
   <data name="Speciality" xml:space="preserve">
     <value>Специалност</value>
   </data>

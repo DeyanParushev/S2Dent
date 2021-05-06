@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionIsTooLong" xml:space="preserve">
-    <value>Описанието е над позволената дължина.</value>
+  <data name="NameLenght" xml:space="preserve">
+    <value>Полето трябва да е с дължина между {2} и {1} символа.</value>
   </data>
-  <data name="FiledIsNull" xml:space="preserve">
-    <value>Полето не може да бъде празно.</value>
-  </data>
-  <data name="InvalidEmail" xml:space="preserve">
-    <value>Невалиден имейл.</value>
-  </data>
-  <data name="NameIsNull" xml:space="preserve">
-    <value>Моля попълнете име.</value>
-  </data>
-  <data name="NameIsTooLong" xml:space="preserve">
-    <value>Името не може да е с дължина над 20 символа.</value>
-  </data>
-  <data name="Required" xml:space="preserve">
+  <data name="NameRequired" xml:space="preserve">
     <value>Полето е задължително.</value>
+  </data>
+  <data name="SpecialityRequired" xml:space="preserve">
+    <value>Моля изберете специалност</value>
   </data>
 </root>

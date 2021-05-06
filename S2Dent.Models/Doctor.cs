@@ -15,8 +15,7 @@
         }
 
         [Required]
-        [MaxLength(100)]
-        public string Specialty { get; set; }
+        public Speciality Specialty { get; set; }
 
         public virtual ICollection<Treatment> Treatments { get; set; }
     }

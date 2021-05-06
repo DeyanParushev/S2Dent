@@ -1,7 +1,6 @@
-﻿namespace S2Dent.MVC
+﻿namespace S2Dent.MVC.Resources
 {
     public class CommonResources
     {
-
     }
 }

@@ -43,16 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\ViewModels\InputModels\DoctorInputModel.bg.resx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ViewModels\InputModels\DoctorInputModel.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Resources\Controllers\" />
   </ItemGroup>
 

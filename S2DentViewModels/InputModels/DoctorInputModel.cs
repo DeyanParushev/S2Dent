@@ -8,16 +8,16 @@
 
     public class DoctorInputModel : IMapFrom<Doctor>, IMapTo<Doctor>
     {
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(DoctorInputModel))]
-        //[StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(ResourceSet))]
+        [Required(ErrorMessage = "NameRequired")]
+        [StringLength(20, ErrorMessage = "NameLenght", MinimumLength = 3)]
         public string FirstName { get; set; }
 
-        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(ResourceSet))]
-        //[StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(ResourceSet))]
+        [Required(ErrorMessage = "NameRequired")]
+        [StringLength(20, ErrorMessage = "NameLenght", MinimumLength = 3)]
         public string MiddleName { get; set; }
 
-        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(ResourceSet))]
-        //[StringLength(20, ErrorMessageResourceName = "NameIsTooLong", ErrorMessageResourceType = typeof(ResourceSet))]
+        [Required(ErrorMessage = "NameRequired")]
+        [StringLength(20, ErrorMessage = "NameLenght", MinimumLength = 3)]
         public string LastName { get; set; }
 
         //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(ResourceSet))]

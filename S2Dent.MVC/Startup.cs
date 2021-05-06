@@ -22,6 +22,8 @@ namespace S2Dent.MVC
     using S2Dent.Models;
     using S2Dent.MVC.Extensions;
     using S2Dent.MVC.Pages;
+    using S2Dent.MVC.Resources;
+    using S2Dent.MVC.Services;
     using S2Dent.Services;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
@@ -55,29 +57,8 @@ namespace S2Dent.MVC
                 options.HttpOnly = HttpOnlyPolicy.Always;
                 options.ConsentCookie.Expiration = DateTime.UtcNow.AddDays(3) - DateTime.UtcNow;
             });
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization(options =>
-                {
-                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-                    {
-                        var assemblyName = new AssemblyName(typeof(CommonResources).GetTypeInfo().Assembly.FullName);
-                        return factory.Create(nameof(CommonResources), assemblyName.Name);
-                    };
-                });
 
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var supportedCultures = new List<CultureInfo>
-                {
-                    new CultureInfo("en"),
-                    new CultureInfo("bg")
-                };
-                options.DefaultRequestCulture = new RequestCulture("bg");
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
-            });
+            services.SetupLocalization();
 
             services.AddTransient<IDoctorsService, DoctorsService>();
 

@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionIsTooLong" xml:space="preserve">
-    <value>Description is too long.</value>
+  <data name="DescriptionLenght" xml:space="preserve">
+    <value>The description must be between {2} and {1} characters long.</value>
   </data>
-  <data name="FieldIsNull" xml:space="preserve">
-    <value>The field cannot be null.</value>
+  <data name="NameLenght" xml:space="preserve">
+    <value>The fileld must be between {2} and {1} characters long.</value>
   </data>
-  <data name="InvalidEmail" xml:space="preserve">
-    <value>Invalid email.</value>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Field is required</value>
   </data>
-  <data name="NameIsNull" xml:space="preserve">
-    <value>Please fill in the name field.</value>
-  </data>
-  <data name="NameIsTooLong" xml:space="preserve">
-    <value>The name cannot be more than 20 symbols long.</value>
-  </data>
-  <data name="Required" xml:space="preserve">
-    <value>Field is required.</value>
+  <data name="SpecialityRequired" xml:space="preserve">
+    <value>Please choose speciality.</value>
   </data>
 </root>

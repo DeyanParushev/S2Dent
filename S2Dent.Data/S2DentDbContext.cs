@@ -32,6 +32,8 @@
 
         public DbSet<InsuranceCompany> InsuranceCompanies { get; set; }
 
+        public DbSet<Speciality> Specialities { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
