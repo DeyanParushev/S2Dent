@@ -12,6 +12,7 @@
             : base()
         {
             Id = Guid.NewGuid().ToString();
+            DoctorsAssistants = new HashSet<DoctorAssisstant>();
         }
 
         [MaxLength(20)]

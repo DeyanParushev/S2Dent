@@ -28,6 +28,8 @@
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 0;
             })
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<S2DentDbContext>();

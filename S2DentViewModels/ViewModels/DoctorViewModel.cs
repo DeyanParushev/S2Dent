@@ -1,6 +1,5 @@
 ﻿namespace S2Dent.ViewModels.ViewModels
 {
-    using S2Dent.DTOs;
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
 
@@ -12,7 +11,7 @@
 
         public string MiddleName { get; set; }
 
-        public string LastName { get; set; }
+        public string ThirdName { get; set; }
 
         public string Email { get; set; }
 

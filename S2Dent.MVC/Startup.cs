@@ -10,9 +10,7 @@ namespace S2Dent.MVC
     using Microsoft.AspNetCore.CookiePolicy;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -21,9 +19,6 @@ namespace S2Dent.MVC
     using S2Dent.DTOs;
     using S2Dent.Models;
     using S2Dent.MVC.Extensions;
-    using S2Dent.MVC.Pages;
-    using S2Dent.MVC.Resources;
-    using S2Dent.MVC.Services;
     using S2Dent.Services;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
@@ -61,6 +56,7 @@ namespace S2Dent.MVC
             services.SetupLocalization();
 
             services.AddTransient<IDoctorsService, DoctorsService>();
+            services.AddTransient<ISpecialitiesService, SpecialitiesService>();
 
             services.AddRazorPages();
         }

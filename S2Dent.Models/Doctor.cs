@@ -10,12 +10,13 @@
             : base()
         {
             Id = Guid.NewGuid().ToString();
-            DoctorsAssistants = new HashSet<DoctorAssisstant>();
             Treatments = new HashSet<Treatment>();
         }
 
         [Required]
-        public Speciality Specialty { get; set; }
+        public int SpecialityId { get; set; }
+
+        public virtual Speciality Specialty { get; set; }
 
         public virtual ICollection<Treatment> Treatments { get; set; }
     }

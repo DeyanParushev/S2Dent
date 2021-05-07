@@ -89,7 +89,7 @@
         
         private void CheckDoctorExists(string id)
         {
-            if (dbContext.Doctors.Any(x => x.Id == id && x.IsDeleted == false))
+            if (!dbContext.Doctors.Any(x => x.Id == id && x.IsDeleted == false))
             {
                 throw new ArgumentException("Doctor does not exist.");
             }

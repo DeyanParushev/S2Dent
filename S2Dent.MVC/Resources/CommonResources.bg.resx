@@ -117,13 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DescriptionLenght" xml:space="preserve">
+    <value>Описанието трябва да е между {2} и {1} символа.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Моля въведете валиден имейл.</value>
+  </data>
   <data name="NameLenght" xml:space="preserve">
     <value>Полето трябва да е с дължина между {2} и {1} символа.</value>
   </data>
-  <data name="NameRequired" xml:space="preserve">
-    <value>Полето е задължително.</value>
+  <data name="Phone" xml:space="preserve">
+    <value>Моля въведете валиден телефон.</value>
   </data>
-  <data name="SpecialityRequired" xml:space="preserve">
-    <value>Моля изберете специалност</value>
+  <data name="Range" xml:space="preserve">
+    <value>Моля въведете валидна специалност.</value>
+  </data>
+  <data name="RequiredDescription" xml:space="preserve">
+    <value>Описанието е задължително.</value>
+  </data>
+  <data name="RequiredLastName" xml:space="preserve">
+    <value>Фалимията е задължителна.</value>
+  </data>
+  <data name="RequiredMiddleName" xml:space="preserve">
+    <value>Презимето е задължително.</value>
+  </data>
+  <data name="RequiredName" xml:space="preserve">
+    <value>Името е задължително.</value>
+  </data>
+  <data name="RequiredSpecility" xml:space="preserve">
+    <value>Моля изберете специалност.</value>
   </data>
 </root>

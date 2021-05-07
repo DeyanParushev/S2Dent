@@ -21,7 +21,7 @@
                 @Localizer["MiddleName"]
             </th>
             <th>
-                @Localizer["LastName"]
+                @Localizer["ThirdName"]
             </th>
             <th>
                 @Localizer["Email"]
@@ -48,7 +48,7 @@
                     @doctor.MiddleName
                 </td>
                 <td>
-                    @doctor.LastName
+                    @doctor.ThirdName
                 </td>
                 <td>
                     @doctor.Email
@@ -63,8 +63,8 @@
                     @doctor.PuctureUrl
                 </td>
                 <td>
-                    <a asp-controller="Doctors" asp-action="Edit" asp-route-doctorId="@doctor.Id">@Localizer["Edit"]</a>
-                    <a asp-controller="Doctors" asp-action="Delete" asp-route-doctorId="@doctor.Id">@Localizer["Delete"]</a>
+                    <a class="text-info" asp-controller="Doctors" asp-action="Edit" asp-route-doctorId="@doctor.Id"><i class="fas fa-user-edit"></i></a>
+                    <a class="text-danger" asp-controller="Doctors" asp-action="Delete" asp-route-doctorId="@doctor.Id"><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         }

@@ -2,25 +2,33 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using S2Dent.DTOs;
+
     using S2Dent.Models;
     using S2Dent.MVC.Areas.Identity;
     using S2Dent.Services.Interfaces;
+    using S2Dent.ViewModels;
     using S2Dent.ViewModels.InputModels;
     using S2Dent.ViewModels.ViewModels;
 
     public class DoctorsController : Controller
     {
         private readonly IDoctorsService doctorsService;
-        private readonly IMapper mapper;
+        private readonly ISpecialitiesService specialitiesService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public DoctorsController(IDoctorsService doctorsService, IMapper mapper)
+        public DoctorsController(
+            IDoctorsService doctorsService,
+            ISpecialitiesService specialitiesService,
+            UserManager<ApplicationUser> userManager)
         {
             this.doctorsService = doctorsService;
-            this.mapper = mapper;
+            this.specialitiesService = specialitiesService;
+            this.userManager = userManager;
         }
 
         [Route("/Team")]
@@ -45,7 +53,7 @@
                 var doctor = doctorsService.GetDoctorById<DoctorViewModel>(id);
                 return View(doctor);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError(null, ex.Message);
                 return Redirect(HttpContext.Request.Path);
@@ -57,22 +65,60 @@
         public async Task<IActionResult> Create()
         {
             var doctor = new DoctorInputModel();
-            return View(doctor);
+            var specialities = await specialitiesService.GetAll<SpecialityViewModel>();
+
+            var formModel = new CreateDoctorFormModel
+            {
+                Doctor = doctor,
+                Specialities = specialities,
+            };
+
+            return View(formModel);
         }
 
         [HttpPost]
         [Authorize(Roles = IdentityRoles.SiteAdmin)]
-        public async Task<IActionResult> Create(DoctorInputModel inputDoctor)
+        public async Task<IActionResult> Create(CreateDoctorFormModel inputDoctor)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                inputDoctor.Specialities = await specialitiesService.GetAll<SpecialityViewModel>();
                 return this.View(inputDoctor);
             }
 
-            var doctor = mapper.Map<Doctor>(inputDoctor);
-            await doctorsService.CreateDoctor(doctor, inputDoctor.Password);
-            return Redirect("/Home");
+            var doctor = new Doctor
+            {
+                FirstName = inputDoctor.Doctor.FirstName,
+                MiddleName = inputDoctor.Doctor.MiddleName,
+                ThirdName = inputDoctor.Doctor.ThirdName,
+                Description = inputDoctor.Doctor.Description,
+                SpecialityId = inputDoctor.Doctor.Speciality,
+                PhoneNumber = inputDoctor.Doctor.PhoneNumber,
+                Email = inputDoctor.Doctor.Email,
+                UserName = inputDoctor.Doctor.FirstName + '_' + inputDoctor.Doctor.ThirdName,
+            };
+
+            var password = doctor.ThirdName + DateTime.UtcNow.DayOfYear.ToString();
+
+            var result = await userManager.CreateAsync(doctor, password);
+
+            if (result.Succeeded)
+            {
+                return Redirect(nameof(this.Doctors));
+            }
+            else
+            {
+                return this.View(result);
+            }
+        }
+
+        [HttpGet("/{doctorId}")]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
+        public async Task<IActionResult> Edit(string doctorId)
+        {
+            var doctor = await doctorsService.GetDoctorById<DoctorInputModel>(doctorId);
+
+            return this.View(doctor);
         }
     }
 }
-
