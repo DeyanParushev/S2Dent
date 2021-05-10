@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-
+    using Microsoft.EntityFrameworkCore;
     using S2Dent.Data;
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
@@ -24,10 +24,10 @@
 
         public async Task<ICollection<T>> GetAllDoctors<T>()
         {
-            var doctors = dbContext.Doctors
+            var doctors = await dbContext.Doctors
                 .Where(x => x.IsDeleted == false)
                 .To<T>()
-                .ToHashSet();
+                .ToListAsync();
 
             return doctors;
         }
@@ -36,10 +36,10 @@
         {
             CheckDoctorExists(id);
 
-            var doctor = dbContext.Doctors
+            var doctor = await dbContext.Doctors
                         .Where(x => x.Id == id && x.IsDeleted == false)
                         .To<T>()
-                        .SingleOrDefault();
+                        .SingleOrDefaultAsync();
 
             return doctor;
         }

@@ -49,7 +49,7 @@
         {
             try
             {
-                var doctor = doctorsService.GetDoctorById<DoctorViewModel>(id);
+                var doctor = await doctorsService.GetDoctorById<DoctorViewModel>(id);
                 return View(doctor);
             }
             catch (Exception ex)

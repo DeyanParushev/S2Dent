@@ -1,7 +1,6 @@
 namespace S2Dent.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
     using System.Threading.Tasks;
@@ -16,7 +15,7 @@ namespace S2Dent.Tests
     using S2Dent.ViewModels.InputModels;
     using S2Dent.ViewModels.ViewModels;
 
-    public class DoctorsServiceTests
+    public class GetByIdTests
     {
         [SetUp]
         public void Setup()
@@ -114,6 +113,43 @@ namespace S2Dent.Tests
             Assert.AreEqual(doctor.PictureUrl, resultDoctor.PictureUrl);
             Assert.AreEqual(doctor.Id, resultDoctor.Id);
             Assert.AreEqual(typeof(DoctorViewModel), resultDoctor.GetType());
+        }
+
+        [TestCase("testId")]
+        public async Task GetByIdShouldThrowErrorWithInvalidId(string id)
+        {
+            var context = SetupInMemoryContext<DoctorViewModel>();
+            var service = new DoctorsService(context);
+
+            var doctor = new Doctor
+            {
+                Id = Guid.NewGuid().ToString(),
+                IsDeleted = false,
+            };
+
+            await context.Doctors.AddAsync(doctor);
+            await context.SaveChangesAsync();
+
+            Assert.That(async () => await service.GetDoctorById<DoctorViewModel>(id), Throws.Exception);
+        }
+
+        [Test]
+        public async Task GetByIdShouldThrowErrorWhenEntityIsDeleted()
+        {
+            var context = SetupInMemoryContext<DoctorViewModel>();
+            var service = new DoctorsService(context);
+
+            var doctor = new Doctor
+            {
+                Id = Guid.NewGuid().ToString(),
+                IsDeleted = true,
+            };
+
+            await context.Doctors.AddAsync(doctor);
+            await context.SaveChangesAsync();
+
+            Assert.That(
+                async () => await service.GetDoctorById<DoctorViewModel>(doctor.Id), Throws.Exception);
         }
 
         private S2DentDbContext SetupInMemoryContext<T>()
