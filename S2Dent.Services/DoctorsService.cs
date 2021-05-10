@@ -5,13 +5,13 @@
     using System.Linq;
     using System.Security.Cryptography;
     using System.Threading.Tasks;
-    
+
     using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-    
+
     using S2Dent.Data;
+    using S2Dent.Models;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
-    using S2Dent.Models;
 
     public class DoctorsService : IDoctorsService
     {
@@ -83,10 +83,10 @@
                 prf: KeyDerivationPrf.HMACSHA512,
                 iterationCount: 10000,
                 numBytesRequested: 512 / 8));
-            
+
             return hashed;
         }
-        
+
         private void CheckDoctorExists(string id)
         {
             if (!dbContext.Doctors.Any(x => x.Id == id && x.IsDeleted == false))

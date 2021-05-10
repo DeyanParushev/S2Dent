@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    <img src="@doctor.PuctureUrl" class="" />
+                    <img src="@doctor.PictureUrl" class="" />
                 </td>
                 <td>
                     @doctor.FirstName
@@ -54,13 +54,13 @@
                     @doctor.Email
                 </td>
                 <td>
-                    @doctor.Specialty
+                    @doctor.Speciality.Name
                 </td>
                 <td>
                     @doctor.Description
                 </td>
                 <td>
-                    @doctor.PuctureUrl
+                    @doctor.PictureUrl
                 </td>
                 <td>
                     <a class="text-info" asp-controller="Doctors" asp-action="Edit" asp-route-doctorId="@doctor.Id"><i class="fas fa-user-edit"></i></a>

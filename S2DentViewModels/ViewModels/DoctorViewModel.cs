@@ -15,10 +15,10 @@
 
         public string Email { get; set; }
 
-        public string Specialty { get; set; }
+        public SpecialityViewModel Speciality { get; set; }
 
         public string Description { get; set; }
 
-        public string PuctureUrl { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

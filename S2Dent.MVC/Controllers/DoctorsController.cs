@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
 
-    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -92,7 +91,7 @@
                 MiddleName = inputDoctor.Doctor.MiddleName,
                 ThirdName = inputDoctor.Doctor.ThirdName,
                 Description = inputDoctor.Doctor.Description,
-                SpecialityId = inputDoctor.Doctor.Speciality,
+                SpecialityId = inputDoctor.Doctor.SpecialityId,
                 PhoneNumber = inputDoctor.Doctor.PhoneNumber,
                 Email = inputDoctor.Doctor.Email,
                 UserName = inputDoctor.Doctor.FirstName + '_' + inputDoctor.Doctor.ThirdName,
@@ -117,8 +116,15 @@
         public async Task<IActionResult> Edit(string doctorId)
         {
             var doctor = await doctorsService.GetDoctorById<DoctorInputModel>(doctorId);
+            var specialities = await specialitiesService.GetAll<SpecialityViewModel>();
 
-            return this.View(doctor);
+            var formModel = new CreateDoctorFormModel
+            {
+                Doctor = doctor,
+                Specialities = specialities,
+            };
+
+            return this.View(formModel);
         }
     }
 }

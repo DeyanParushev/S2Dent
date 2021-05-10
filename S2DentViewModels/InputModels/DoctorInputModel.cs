@@ -6,10 +6,11 @@
 
     using S2Dent.Models;
     using S2Dent.Services.Automapper;
-    using S2Dent.ViewModels.ViewModels;
 
     public class DoctorInputModel : IMapFrom<Doctor>, IMapTo<Doctor>
     {
+        public string Id { get; set; }
+
         [Required(ErrorMessage = ErrorMesssages.RequiredName)]
         [StringLength(20, ErrorMessage = ErrorMesssages.NameLenght, MinimumLength = 3)]
         public string FirstName { get; set; }
@@ -23,8 +24,7 @@
         public string ThirdName { get; set; }
 
         [Required(ErrorMessage = ErrorMesssages.RequiredSpeciality)]
-        [Range(0, 50)]
-        public int Speciality { get; set; }
+        public int SpecialityId { get; set; }
 
         [Required(ErrorMessage = ErrorMesssages.RequiredDescription)]
         [StringLength(450, ErrorMessage = ErrorMesssages.DescriptionLenght, MinimumLength = 10)]
