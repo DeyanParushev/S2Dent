@@ -3,8 +3,6 @@ namespace S2Dent.Tests
     using System;
     using System.Reflection;
 
-    using System.Threading.Tasks;
-
     using Microsoft.EntityFrameworkCore;
     using NUnit.Framework;
 
@@ -25,16 +23,23 @@ namespace S2Dent.Tests
         [TestCase("John", "Doe", "Johnson", "testEmail@email.com", "testDescpription", 1, "testSpeciality", "testPhone")]
         [TestCase("Arthur", "Clark", "Spencer", "testEmail@email2.com", "testDescpription2", 2, "testSpeciality2", "testPhone2")]
         [TestCase("Aizuk", "Azimof", "Ivanov", "testEmail@email3.com", "testDescpription3", 3, "testSpeciality3", "testPhone3")]
-        public async Task GetByIdShouldReturnInputModelProperly(
+        public void GetByIdShouldReturnInputModelProperly(
             string firstName, string middleName,
             string lastName, string email,
             string description, int speciality,
             string specailityName, string phone)
         {
             //// Arange
-            var context = SetupInMemoryContext<DoctorInputModel>();
+            AutoMapperConfig.RegisterMappings(
+                 typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
-            var doctorsService = new DoctorsService(context);
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .Options;
+
+            using var context = new S2DentDbContext(options);
+            var service = new DoctorsService(context);
+
             var specialityModel = new Speciality { Id = speciality, Name = specailityName };
 
             var doctor = new Doctor
@@ -51,10 +56,10 @@ namespace S2Dent.Tests
 
             context.Doctors.Add(doctor);
             context.Specialities.Add(specialityModel);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
 
             //// Act
-            var resultDoctor = await doctorsService.GetDoctorById<DoctorInputModel>(doctor.Id);
+            var resultDoctor = service.GetDoctorById<DoctorInputModel>(doctor.Id).GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(doctor.FirstName, resultDoctor.FirstName);
@@ -66,21 +71,28 @@ namespace S2Dent.Tests
             Assert.AreEqual(doctor.PhoneNumber, resultDoctor.PhoneNumber);
             Assert.AreEqual(doctor.Id, resultDoctor.Id);
             Assert.AreEqual(typeof(DoctorInputModel), resultDoctor.GetType());
+
         }
 
         [TestCase("John", "Doe", "Johnson", "testEmail@email.com", "testDescpription", "Anestesiologist", "testURL")]
         [TestCase("Arthur", "Clark", "Spencer", "testEmail@email2.com", "testDescpription2", "Orthodont", "testURL2")]
         [TestCase("Aizuk", "Azimof", "Ivanov", "testEmail@email3.com", "testDescpription3", "Technician", "testURL3")]
-        public async Task GetByIdShouldReturnViewModelProperly(
+        public void GetByIdShouldReturnViewModelProperly(
         string firstName, string middleName,
         string lastName, string email,
         string description, string speciality,
         string pictureUrl)
         {
             //// Arange
-            var context = SetupInMemoryContext<DoctorViewModel>();
+            AutoMapperConfig.RegisterMappings(
+                 typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
-            var doctorsService = new DoctorsService(context);
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .Options;
+
+            using var context = new S2DentDbContext(options);
+            var service = new DoctorsService(context);
 
             var doctor = new Doctor
             {
@@ -98,10 +110,10 @@ namespace S2Dent.Tests
             };
 
             context.Doctors.Add(doctor);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
 
             //// Act
-            var resultDoctor = await doctorsService.GetDoctorById<DoctorViewModel>(doctor.Id);
+            var resultDoctor = service.GetDoctorById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(doctor.FirstName, resultDoctor.FirstName);
@@ -113,12 +125,20 @@ namespace S2Dent.Tests
             Assert.AreEqual(doctor.PictureUrl, resultDoctor.PictureUrl);
             Assert.AreEqual(doctor.Id, resultDoctor.Id);
             Assert.AreEqual(typeof(DoctorViewModel), resultDoctor.GetType());
+
         }
 
         [TestCase("testId")]
-        public async Task GetByIdShouldThrowErrorWithInvalidId(string id)
+        public void GetByIdShouldThrowErrorWithInvalidId(string id)
         {
-            var context = SetupInMemoryContext<DoctorViewModel>();
+            AutoMapperConfig.RegisterMappings(
+                 typeof(DoctorViewModel).GetTypeInfo().Assembly);
+
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .Options;
+
+            using var context = new S2DentDbContext(options);
             var service = new DoctorsService(context);
 
             var doctor = new Doctor
@@ -127,16 +147,24 @@ namespace S2Dent.Tests
                 IsDeleted = false,
             };
 
-            await context.Doctors.AddAsync(doctor);
-            await context.SaveChangesAsync();
+            context.Doctors.Add(doctor);
+            context.SaveChanges();
 
-            Assert.That(async () => await service.GetDoctorById<DoctorViewModel>(id), Throws.Exception);
+            Assert.That(() => service.GetDoctorById<DoctorViewModel>(id).GetAwaiter().GetResult(), Throws.Exception);
+
         }
 
         [Test]
-        public async Task GetByIdShouldThrowErrorWhenEntityIsDeleted()
+        public void GetByIdShouldThrowErrorWhenEntityIsDeleted()
         {
-            var context = SetupInMemoryContext<DoctorViewModel>();
+            AutoMapperConfig.RegisterMappings(
+                 typeof(DoctorViewModel).GetTypeInfo().Assembly);
+
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .Options;
+
+            using var context = new S2DentDbContext(options);
             var service = new DoctorsService(context);
 
             var doctor = new Doctor
@@ -145,25 +173,10 @@ namespace S2Dent.Tests
                 IsDeleted = true,
             };
 
-            await context.Doctors.AddAsync(doctor);
-            await context.SaveChangesAsync();
+            context.Doctors.AddAsync(doctor);
+            context.SaveChangesAsync();
 
-            Assert.That(
-                async () => await service.GetDoctorById<DoctorViewModel>(doctor.Id), Throws.Exception);
-        }
-
-        private S2DentDbContext SetupInMemoryContext<T>()
-        {
-            AutoMapperConfig.RegisterMappings(
-                typeof(T).GetTypeInfo().Assembly);
-
-            var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
-              .Options;
-
-            var context = new S2DentDbContext(options);
-
-            return context;
+            Assert.That(() => service.GetDoctorById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult(), Throws.Exception);
         }
     }
 }

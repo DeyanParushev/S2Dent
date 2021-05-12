@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using NUnit.Framework;
@@ -16,10 +15,17 @@
     public class GetAllDoctors
     {
         [Test]
-        public async Task GetAllShouldReturnICollection()
+        public void GetAllShouldReturnICollection()
         {
             //// Arange
-            var context = SetupInMemoryContext<DoctorViewModel>();
+            AutoMapperConfig.RegisterMappings(
+                typeof(DoctorViewModel).GetTypeInfo().Assembly);
+
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(nameof(GetAllShouldReturnICollection))
+              .Options;
+
+            using var context = new S2DentDbContext(options);
             var service = new DoctorsService(context);
 
             var inputDoctors = new List<Doctor>()
@@ -28,21 +34,28 @@
                 new Doctor{FirstName = "Peshi", ThirdName = "Georgiev"},
             };
 
-            await context.Doctors.AddRangeAsync(inputDoctors);
-            await context.SaveChangesAsync();
+            context.Doctors.AddRange(inputDoctors);
+            context.SaveChanges();
 
             //// Act
-            var resultDoctors = await service.GetAllDoctors<DoctorViewModel>();
+            var resultDoctors = service.GetAllDoctors<DoctorViewModel>().GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(true, resultDoctors is ICollection<DoctorViewModel>);
         }
 
         [Test]
-        public async Task GetAllShouldReturnCorrectData()
+        public void GetAllShouldReturnCorrectData()
         {
             //// Arange
-            var context = SetupInMemoryContext<DoctorViewModel>();
+            AutoMapperConfig.RegisterMappings(
+                 typeof(DoctorViewModel).GetTypeInfo().Assembly);
+
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+              .UseInMemoryDatabase(nameof(GetAllShouldReturnCorrectData))
+              .Options;
+
+            using var context = new S2DentDbContext(options);
             var service = new DoctorsService(context);
 
             var inputDoctors = new List<Doctor>()
@@ -51,35 +64,20 @@
                 new Doctor{FirstName = "Peshi", ThirdName = "Georgiev"},
             };
 
-            await context.Doctors.AddRangeAsync(inputDoctors);
-            await context.SaveChangesAsync();
+            context.Doctors.AddRange(inputDoctors);
+            context.SaveChanges();
 
             //// Act
-            var resultDoctors = await service.GetAllDoctors<DoctorViewModel>();
+            var resultDoctors = service.GetAllDoctors<DoctorViewModel>().GetAwaiter().GetResult();
             var counter = 0;
 
             //// Assert
             foreach (var resultDoctor in resultDoctors)
             {
                 Assert.AreEqual(inputDoctors[counter].FirstName, resultDoctor.FirstName);
-                Assert.AreEqual(inputDoctors[counter].ThirdName, resultDoctor.ThirdName );
+                Assert.AreEqual(inputDoctors[counter].ThirdName, resultDoctor.ThirdName);
                 counter++;
             }
-        }
-
-        private S2DentDbContext SetupInMemoryContext<T>()
-        {
-            //// Registers the reflection automapping configuration
-            AutoMapperConfig.RegisterMappings(
-                typeof(T).GetTypeInfo().Assembly);
-
-            var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
-              .Options;
-
-            var context = new S2DentDbContext(options);
-
-            return context;
         }
     }
 }
