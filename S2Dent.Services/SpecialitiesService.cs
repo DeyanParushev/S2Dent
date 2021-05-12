@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using S2Dent.Data;
+    using S2Dent.Models;
     using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
 
@@ -43,6 +44,30 @@
             }
 
             return speciality;
+        }
+
+        public async Task Create(Speciality speciality)
+        {
+            if(dbContext.Specialities.Any(x => x.Name.ToLower() == speciality.Name.ToLower() || x.Id == speciality.Id))
+            {
+                throw new ArgumentException("Speciality already exists.");
+            }
+
+            await dbContext.Specialities.AddAsync(speciality);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task Edit(Speciality speciality)
+        {
+            var specialityModel = await dbContext.Specialities.SingleOrDefaultAsync(x => x.Id == speciality.Id && x.IsDeleted == false);
+
+            if(speciality == null)
+            {
+                throw new ArgumentException("Speciality does not exist.");
+            }
+
+            specialityModel.Name = speciality.Name;
+            await dbContext.SaveChangesAsync();
         }
     }
 }

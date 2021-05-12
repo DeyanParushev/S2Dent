@@ -14,7 +14,7 @@
     using S2Dent.ViewModels.InputModels;
     using S2Dent.Models;
 
-    public class GetAll
+    public class GetAllSpecialities
     {
         [Test]
         public void GetAllShouldReturnIcollectionViewModel()
