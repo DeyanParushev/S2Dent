@@ -48,7 +48,9 @@
                 var service = new SpecialitiesService(context);
 
                 //// Assert
-                Assert.That(() => service.GetOne<SpecialityViewModel>(intId).GetAwaiter().GetResult(), Throws.Exception);
+                Assert.That(
+                    () => service.GetOne<SpecialityViewModel>(intId).GetAwaiter().GetResult(), 
+                    Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Speciality does not exist."));
             }
         }
 

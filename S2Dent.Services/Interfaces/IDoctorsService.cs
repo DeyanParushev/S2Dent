@@ -7,14 +7,14 @@
 
     public interface IDoctorsService
     {
-        public Task CreateDoctor(Doctor doctor, string password);
+        public Task Create(Doctor doctor, string password);
         
-        public Task DeleteDoctor(string id);
+        public Task Delete(string id);
         
-        public Task<ICollection<T>> GetAllDoctors<T>();
+        public Task<ICollection<T>> GetAll<T>();
         
-        public Task<T> GetDoctorById<T>(string id);
+        public Task<T> GetById<T>(string id);
         
-        public Task UpdateDoctor(Doctor inputDoctor);
+        public Task Edit(Doctor inputDoctor);
     }
 }

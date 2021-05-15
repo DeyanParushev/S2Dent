@@ -38,7 +38,7 @@
             context.SaveChanges();
 
             //// Act
-            var resultDoctors = service.GetAllDoctors<DoctorViewModel>().GetAwaiter().GetResult();
+            var resultDoctors = service.GetAll<DoctorViewModel>().GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(true, resultDoctors is ICollection<DoctorViewModel>);
@@ -68,7 +68,7 @@
             context.SaveChanges();
 
             //// Act
-            var resultDoctors = service.GetAllDoctors<DoctorViewModel>().GetAwaiter().GetResult();
+            var resultDoctors = service.GetAll<DoctorViewModel>().GetAwaiter().GetResult();
             var counter = 0;
 
             //// Assert

@@ -34,7 +34,7 @@ namespace S2Dent.Tests
                  typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
             var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .UseInMemoryDatabase(nameof(GetByIdShouldReturnInputModelProperly))
               .Options;
 
             using var context = new S2DentDbContext(options);
@@ -59,7 +59,7 @@ namespace S2Dent.Tests
             context.SaveChanges();
 
             //// Act
-            var resultDoctor = service.GetDoctorById<DoctorInputModel>(doctor.Id).GetAwaiter().GetResult();
+            var resultDoctor = service.GetById<DoctorInputModel>(doctor.Id).GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(doctor.FirstName, resultDoctor.FirstName);
@@ -71,7 +71,6 @@ namespace S2Dent.Tests
             Assert.AreEqual(doctor.PhoneNumber, resultDoctor.PhoneNumber);
             Assert.AreEqual(doctor.Id, resultDoctor.Id);
             Assert.AreEqual(typeof(DoctorInputModel), resultDoctor.GetType());
-
         }
 
         [TestCase("John", "Doe", "Johnson", "testEmail@email.com", "testDescpription", "Anestesiologist", "testURL")]
@@ -88,7 +87,7 @@ namespace S2Dent.Tests
                  typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
             var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .UseInMemoryDatabase(nameof(GetByIdShouldReturnViewModelProperly))
               .Options;
 
             using var context = new S2DentDbContext(options);
@@ -113,7 +112,7 @@ namespace S2Dent.Tests
             context.SaveChanges();
 
             //// Act
-            var resultDoctor = service.GetDoctorById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult();
+            var resultDoctor = service.GetById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult();
 
             //// Assert
             Assert.AreEqual(doctor.FirstName, resultDoctor.FirstName);
@@ -125,7 +124,6 @@ namespace S2Dent.Tests
             Assert.AreEqual(doctor.PictureUrl, resultDoctor.PictureUrl);
             Assert.AreEqual(doctor.Id, resultDoctor.Id);
             Assert.AreEqual(typeof(DoctorViewModel), resultDoctor.GetType());
-
         }
 
         [TestCase("testId")]
@@ -135,7 +133,7 @@ namespace S2Dent.Tests
                  typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
             var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .UseInMemoryDatabase(nameof(GetByIdShouldThrowErrorWithInvalidId))
               .Options;
 
             using var context = new S2DentDbContext(options);
@@ -150,7 +148,9 @@ namespace S2Dent.Tests
             context.Doctors.Add(doctor);
             context.SaveChanges();
 
-            Assert.That(() => service.GetDoctorById<DoctorViewModel>(id).GetAwaiter().GetResult(), Throws.Exception);
+            Assert.That(
+                () => service.GetById<DoctorViewModel>(id).GetAwaiter().GetResult(), 
+                Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Doctor does not exist."));
 
         }
 
@@ -161,7 +161,7 @@ namespace S2Dent.Tests
                  typeof(DoctorViewModel).GetTypeInfo().Assembly);
 
             var options = new DbContextOptionsBuilder<S2DentDbContext>()
-              .UseInMemoryDatabase(databaseName: "FakeConnectionString")
+              .UseInMemoryDatabase(nameof(GetByIdShouldThrowErrorWhenEntityIsDeleted))
               .Options;
 
             using var context = new S2DentDbContext(options);
@@ -176,7 +176,9 @@ namespace S2Dent.Tests
             context.Doctors.AddAsync(doctor);
             context.SaveChangesAsync();
 
-            Assert.That(() => service.GetDoctorById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult(), Throws.Exception);
+            Assert.That(
+                () => service.GetById<DoctorViewModel>(doctor.Id).GetAwaiter().GetResult(), 
+                Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Doctor does not exist."));
         }
     }
 }

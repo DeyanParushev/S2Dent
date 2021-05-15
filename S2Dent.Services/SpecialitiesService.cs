@@ -40,7 +40,7 @@
 
             if(speciality == null)
             {
-                throw new ArgumentNullException("Speciality does not exist.");
+                throw new ArgumentException("Speciality does not exist.");
             }
 
             return speciality;
@@ -59,14 +59,28 @@
 
         public async Task Edit(Speciality speciality)
         {
-            var specialityModel = await dbContext.Specialities.SingleOrDefaultAsync(x => x.Id == speciality.Id && x.IsDeleted == false);
+            var specialityModel = await dbContext.Specialities.SingleOrDefaultAsync(x => x.Id == speciality.Id);
+
+            if(specialityModel == null)
+            {
+                throw new ArgumentException("Speciality does not exist.");
+            }
+
+            specialityModel.Name = speciality.Name;
+            specialityModel.IsDeleted = speciality.IsDeleted;
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(int specialityId)
+        {
+            var speciality = await dbContext.Specialities.SingleOrDefaultAsync(x => x.Id == specialityId && x.IsDeleted == false);
 
             if(speciality == null)
             {
                 throw new ArgumentException("Speciality does not exist.");
             }
 
-            specialityModel.Name = speciality.Name;
+            speciality.IsDeleted = true;
             await dbContext.SaveChangesAsync();
         }
     }

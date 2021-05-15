@@ -33,14 +33,14 @@
         [Route("/Team")]
         public async Task<IActionResult> Team()
         {
-            var doctors = await doctorsService.GetAllDoctors<DoctorViewModel>();
+            var doctors = await doctorsService.GetAll<DoctorViewModel>();
             return View(doctors);
         }
 
         [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Doctors()
         {
-            var doctors = await doctorsService.GetAllDoctors<DoctorViewModel>();
+            var doctors = await doctorsService.GetAll<DoctorViewModel>();
             return View(doctors);
         }
 
@@ -49,7 +49,7 @@
         {
             try
             {
-                var doctor = await doctorsService.GetDoctorById<DoctorViewModel>(id);
+                var doctor = await doctorsService.GetById<DoctorViewModel>(id);
                 return View(doctor);
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@
         [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Edit(string doctorId)
         {
-            var doctor = await doctorsService.GetDoctorById<DoctorInputModel>(doctorId);
+            var doctor = await doctorsService.GetById<DoctorInputModel>(doctorId);
             var specialities = await specialitiesService.GetAll<SpecialityViewModel>();
 
             var formModel = new CreateDoctorFormModel

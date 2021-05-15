@@ -22,7 +22,7 @@
             dbContext = context;
         }
 
-        public async Task<ICollection<T>> GetAllDoctors<T>()
+        public async Task<ICollection<T>> GetAll<T>()
         {
             var doctors = await dbContext.Doctors
                 .Where(x => x.IsDeleted == false)
@@ -32,7 +32,7 @@
             return doctors;
         }
 
-        public async Task<T> GetDoctorById<T>(string id)
+        public async Task<T> GetById<T>(string id)
         {
             CheckDoctorExists(id);
 
@@ -44,14 +44,14 @@
             return doctor;
         }
 
-        public async Task CreateDoctor(Doctor doctor, string password)
+        public async Task Create(Doctor doctor, string password)
         {
             doctor.PasswordHash = GetHashedPassword(password);
             dbContext.Doctors.Add(doctor);
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateDoctor(Doctor inputDoctor)
+        public async Task Edit(Doctor inputDoctor)
         {
             CheckDoctorExists(inputDoctor.Id);
 
@@ -59,7 +59,7 @@
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteDoctor(string id)
+        public async Task Delete(string id)
         {
             CheckDoctorExists(id);
 
