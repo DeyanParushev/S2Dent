@@ -19,6 +19,7 @@
                 .UseInMemoryDatabase(nameof(DeleteShouldTrhowException))
                 .Options;
             using var context = new S2DentDbContext(options);
+            
             var service = new DoctorsService(context);
             var doctor = new Doctor
             {

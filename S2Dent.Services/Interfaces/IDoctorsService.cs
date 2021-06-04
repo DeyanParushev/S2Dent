@@ -15,6 +15,6 @@
         
         public Task<T> GetById<T>(string id);
         
-        public Task Edit(Doctor inputDoctor);
+        public Task EditDoctorInfo(Doctor inputDoctor);
     }
 }

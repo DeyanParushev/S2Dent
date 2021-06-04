@@ -51,10 +51,10 @@
 
             //// Assert
             Assert.That(
-                () => service.Edit(testInputDoctor).GetAwaiter().GetResult(),
+                () => service.EditDoctorInfo(testInputDoctor).GetAwaiter().GetResult(),
                 Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Doctor does not exist."));
             Assert.That(
-                () => service.Edit(secondTestInputDoctor).GetAwaiter().GetResult(),
+                () => service.EditDoctorInfo(secondTestInputDoctor).GetAwaiter().GetResult(),
                 Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Doctor does not exist."));
         }
 
@@ -63,7 +63,6 @@
             string id, string firstName, string middleName,
             string lastName)
         {
-            //// TODO finish test
             //// Arange
             var options = new DbContextOptionsBuilder<S2DentDbContext>()
                 .UseInMemoryDatabase(nameof(EditDoctorShowldChangeBasicProperties))
@@ -85,21 +84,73 @@
             //// Act
             var editDoctor = new Doctor
             {
-                Id = doctor.Id,
+                Id = id,
                 FirstName = firstName,
                 MiddleName = middleName,
                 ThirdName = lastName,
             };
 
-            service.Edit(editDoctor).GetAwaiter().GetResult();
+            service.EditDoctorInfo(editDoctor).GetAwaiter().GetResult();
 
             //// Asert
-            var doctorModel = context.Doctors.FirstOrDefault(x => x.Id == doctor.Id);
+            var doctorModel = context.Doctors.AsNoTracking().FirstOrDefault(x => x.Id == doctor.Id);
 
             Assert.AreEqual(editDoctor.Id, doctorModel.Id);
             Assert.AreEqual(editDoctor.FirstName, doctorModel.FirstName);
             Assert.AreEqual(editDoctor.MiddleName, doctorModel.MiddleName);
             Assert.AreEqual(editDoctor.ThirdName, doctorModel.ThirdName);
+        }
+
+        [Test]
+        public void EditDoctorShouldChangeSpecility()
+        {
+            //// Arange
+            var options = new DbContextOptionsBuilder<S2DentDbContext>()
+                .UseInMemoryDatabase(nameof(EditDoctorShouldChangeSpecility))
+                .Options;
+            using var context = new S2DentDbContext(options);
+            var service = new DoctorsService(context);
+            var doctor = new Doctor
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "John",
+                MiddleName = "Doe",
+                ThirdName = "Johnson",
+                IsDeleted = false,
+                Speciality = new Speciality
+                {
+                    Id = 1,
+                    Name = "Doctor"
+                }
+            };
+
+            var editSpeciality = new Speciality
+            {
+                Id = 2,
+                Name = "Pediatritian",
+            };
+
+            context.Specialities.Add(editSpeciality);
+            context.Doctors.Add(doctor);
+            context.SaveChanges();
+
+            //// Act
+            var editDoctor = new Doctor
+            {
+                Id = doctor.Id,
+                FirstName = doctor.FirstName,
+                MiddleName = doctor.MiddleName,
+                ThirdName = doctor.ThirdName,
+                IsDeleted = false,
+                Speciality = editSpeciality,
+            };
+
+            service.EditDoctorInfo(editDoctor).GetAwaiter().GetResult();
+            var resultDoctor = 
+                context.Doctors.SingleOrDefault(x => x.Id == editDoctor.Id && x.IsDeleted == false);
+
+            Assert.AreEqual(editSpeciality.Id, resultDoctor.Speciality.Id);
+            Assert.AreEqual(editSpeciality.Name, resultDoctor.Speciality.Name);
         }
     }
 }

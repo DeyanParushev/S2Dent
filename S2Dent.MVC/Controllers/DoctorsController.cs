@@ -2,13 +2,14 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using S2Dent.Models;
     using S2Dent.MVC.Areas.Identity;
+    using S2Dent.Services.Automapper;
     using S2Dent.Services.Interfaces;
     using S2Dent.ViewModels;
     using S2Dent.ViewModels.InputModels;
@@ -19,6 +20,7 @@
         private readonly IDoctorsService doctorsService;
         private readonly ISpecialitiesService specialitiesService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IMapper mapper;
 
         public DoctorsController(
             IDoctorsService doctorsService,
@@ -28,6 +30,7 @@
             this.doctorsService = doctorsService;
             this.specialitiesService = specialitiesService;
             this.userManager = userManager;
+            mapper = AutoMapperConfig.MapperInstance;
         }
 
         [Route("/Team")]
@@ -107,7 +110,7 @@
             }
             else
             {
-                return this.View(result);
+                return View(result);
             }
         }
 
@@ -124,7 +127,45 @@
                 Specialities = specialities,
             };
 
-            return this.View(formModel);
+            return View(formModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
+        public async Task<IActionResult> EditDoctor(CreateDoctorFormModel inputModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    inputModel.Specialities = await specialitiesService.GetAll<SpecialityViewModel>();
+                    return View(nameof(Edit), inputModel);
+                }
+
+                var doctor = mapper.Map<Doctor>(inputModel.Doctor);
+                
+                await doctorsService.EditDoctorInfo(doctor);
+                return Redirect(nameof(Doctors));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = IdentityRoles.SiteAdmin)]
+        public async Task<IActionResult> Delete(string doctorId)
+        {
+            try
+            {
+                await doctorsService.Delete(doctorId);
+                return Redirect(nameof(Doctors));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

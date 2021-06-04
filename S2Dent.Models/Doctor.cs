@@ -11,6 +11,7 @@
         {
             Id = Guid.NewGuid().ToString();
             Treatments = new HashSet<Treatment>();
+            Speciality = new Speciality();
         }
 
         [Required]

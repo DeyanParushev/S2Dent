@@ -51,11 +51,20 @@
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Edit(Doctor inputDoctor)
+        public async Task EditDoctorInfo(Doctor inputDoctor)
         {
             CheckDoctorExists(inputDoctor.Id);
 
-            dbContext.Doctors.Update(inputDoctor);
+            var doctorModel = dbContext.Doctors.SingleOrDefault(x => x.Id == inputDoctor.Id && x.IsDeleted == false);
+            doctorModel.FirstName = inputDoctor.FirstName;
+            doctorModel.MiddleName = inputDoctor.MiddleName;
+            doctorModel.ThirdName = inputDoctor.ThirdName;
+            doctorModel.SpecialityId = inputDoctor.SpecialityId;
+            doctorModel.Description = inputDoctor.Description;
+            doctorModel.PhoneNumber = inputDoctor.PhoneNumber;
+            doctorModel.Email = inputDoctor.Email;
+            doctorModel.NormalizedEmail = inputDoctor.Email?.ToUpper();
+
             await dbContext.SaveChangesAsync();
         }
 
