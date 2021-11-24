@@ -57,6 +57,7 @@ namespace S2Dent.MVC
 
             services.AddTransient<IDoctorsService, DoctorsService>();
             services.AddTransient<ISpecialitiesService, SpecialitiesService>();
+            services.AddTransient<INewsService, NewsService>();
 
             services.AddRazorPages();
         }

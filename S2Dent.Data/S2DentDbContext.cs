@@ -34,6 +34,8 @@
 
         public DbSet<Speciality> Specialities { get; set; }
 
+        public DbSet<News> News { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();

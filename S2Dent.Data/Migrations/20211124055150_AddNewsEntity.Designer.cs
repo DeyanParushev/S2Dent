@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using S2Dent.Data;
 
 namespace S2Dent.Data.Migrations
 {
     [DbContext(typeof(S2DentDbContext))]
-    partial class S2DentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211124055150_AddNewsEntity")]
+    partial class AddNewsEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
