@@ -9,7 +9,10 @@ namespace S2Dent.Models
         public int Id { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        public string TitleInBulgarian { get; set; }
+
+        [Required]
+        public string TitleInEnglish { get; set; }
 
         [Required]
         public string ContentInEnglish { get; set; }
@@ -19,7 +22,9 @@ namespace S2Dent.Models
 
         public DateTime Date { get; set; }
 
-        public string Description { get; set; }
+        public string DescriptionInEnglish { get; set; }
+
+        public string DescriptionInBulgarian { get; set; }
 
         public string PictureUrl { get; set; }
 

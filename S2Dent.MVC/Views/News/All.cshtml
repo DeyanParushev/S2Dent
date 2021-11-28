@@ -4,7 +4,7 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
+<h1> Admin View</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,19 +16,25 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.TitleInBulgarian)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContentInEnglish)
+                @Html.DisplayNameFor(model => model.TitleInEnglish)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ContentInBulgarian)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ContentInEnglish)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.DescriptionInBulgarian)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionInEnglish)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PictureUrl)
@@ -43,7 +49,10 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.TitleInBulgarian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleInEnglish)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ContentInEnglish)
@@ -55,7 +64,10 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.DescriptionInBulgarian)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionInEnglish)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PictureUrl)

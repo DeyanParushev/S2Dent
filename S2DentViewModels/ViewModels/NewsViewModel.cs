@@ -8,7 +8,9 @@ namespace S2Dent.ViewModels.ViewModels
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string TitleInBulgarian { get; set; }
+        
+        public string TitleInEnglish { get; set; }
 
         public string ContentInEnglish { get; set; }
 
@@ -16,7 +18,9 @@ namespace S2Dent.ViewModels.ViewModels
 
         public DateTime Date { get; set; }
 
-        public string Description { get; set; }
+        public string DescriptionInBulgarian { get; set; }
+
+        public string DescriptionInEnglish { get; set; }
 
         public string PictureUrl { get; set; }
     }

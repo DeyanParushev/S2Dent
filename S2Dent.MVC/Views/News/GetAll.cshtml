@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<S2Dent.ViewModels.ViewModels.NewsViewModel>
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1 class="text-center">User News</h1>
+
+@foreach (var news in Model)
+{
+    <div class="container-fluid row">
+        <h3>@news.TitleInBulgarian</h3>
+        <i>@news.Date</i>
+    </div>
+}

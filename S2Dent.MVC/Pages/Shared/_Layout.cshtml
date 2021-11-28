@@ -34,23 +34,24 @@
                                 <a class="nav-link text-primary" asp-controller="Doctors" asp-action="Team">@Localizer["Team"]</a>
                             </li>
                             <li>
-                                <a class="nav-link text-primary" asp-controller="Services" asp-action="All">@Localizer["Services"]</a>
+                                <a class="nav-link text-primary" asp-controller="Services" asp-action="GetAll">@Localizer["Services"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="All">@Localizer["Testimonials"]</a>
+                                <a class="nav-link text-primary" asp-controller="Testimonials" asp-action="GetAll">@Localizer["Testimonials"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="All">@Localizer["Gallerry"]</a>
+                                <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="GetAll">@Localizer["Gallery"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["News"]</a>
+                                <a class="nav-link text-primary" asp-controller="News" asp-action="GetAll">@Localizer["News"]</a>
                             </li>
                         }
                         else
                         {
+                            // Admin pannel
                             <li class="nav-item">
                                 <a class="nav-link text-primary" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
                             </li>
@@ -67,7 +68,7 @@
                                 <a class="nav-link text-primary" asp-controller="Gallerry" asp-action="Gallerry">@Localizer["Gallery"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary" asp-controller="News" asp-action="News">@Localizer["News"]</a>
+                                <a class="nav-link text-primary" asp-controller="News" asp-action="All">@Localizer["News"]</a>
                             </li>
                             @*<li class="nav-item">
                                 <a class="nav-link text-primary" asp-controller="Home" asp-action="Contacts">@Localizer["Contacts"]</a>
