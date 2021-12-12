@@ -63,6 +63,7 @@ namespace S2Dent.MVC.Controllers
             }
         }
 
+        [HttpGet]
         [Authorize(Roles = IdentityRoles.SiteAdmin)]
         public async Task<IActionResult> Create()
         {
@@ -72,7 +73,7 @@ namespace S2Dent.MVC.Controllers
 
         [HttpPost]
         [Authorize(Roles = IdentityRoles.SiteAdmin)]
-        public async Task<IActionResult> Create(NewsInputModel newsInput)
+        public async Task<IActionResult> CreateNews(NewsInputModel newsInput)
         {
             if (!this.ModelState.IsValid)
             {

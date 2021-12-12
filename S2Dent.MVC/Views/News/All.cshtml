@@ -1,83 +1,53 @@
 ﻿@model IEnumerable<S2Dent.ViewModels.ViewModels.NewsViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @{
     ViewData["Title"] = "View";
 }
 
-<h1> Admin View</h1>
+<h1 class="text-center my-3 py-md-5">@Localizer["List"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Localizer["Date"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TitleInBulgarian)
+                @Localizer["Picture"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TitleInEnglish)
+                @Localizer["Id"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContentInBulgarian)
+                @Localizer["TitleBg"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContentInEnglish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionInBulgarian)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionInEnglish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PictureUrl)
+                @Localizer["TitleEn"]
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TitleInBulgarian)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TitleInEnglish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContentInEnglish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContentInBulgarian)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionInBulgarian)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionInEnglish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.PictureUrl</td>
+                <td>@item.TitleInBulgarian</td>
+                <td>@item.TitleInEnglish</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create" class="btn alert-primary">@Localizer["Create"]</a>
+</p>

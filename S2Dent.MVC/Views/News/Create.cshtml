@@ -1,64 +1,61 @@
 ﻿@model S2Dent.ViewModels.InputModels.NewsInputModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create - News</h1>
+<h1 class="text-center">@Localizer["Create"]</h1>
 
 <hr />
-<div class="row">
-    <div class="col-sm-4 align-content-center">
-        <form asp-action="Create">
+<div class="row col-md-12">
+    <div class="col-md-6 offset-3">
+        <form asp-action="CreateNews">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TitleInBulgarian" class="control-label"></label>
+                <label asp-for="TitleInBulgarian" class="control-label">@Localizer["TitleBg"]</label>
                 <input asp-for="TitleInBulgarian" class="form-control" />
                 <span asp-validation-for="TitleInBulgarian" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TitleInEnglish" class="control-label"></label>
+                <label asp-for="TitleInEnglish" class="control-label">@Localizer["TitleEn"]</label>
                 <input asp-for="TitleInEnglish" class="form-control" />
                 <span asp-validation-for="TitleInEnglish" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContentInBulgarian" class="control-label"></label>
-                <input asp-for="ContentInBulgarian" class="form-control" />
-                <span asp-validation-for="ContentInBulgarian" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContentInEnglish" class="control-label"></label>
-                <textrea asp-for="ContentInEnglish" class="form-control" />
-                <span asp-validation-for="ContentInEnglish" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescriptionInBulgarian" class="control-label"></label>
+                <label asp-for="DescriptionInBulgarian" class="control-label">@Localizer["DescriptionBg"]</label>
                 <input asp-for="DescriptionInBulgarian" class="form-control" />
                 <span asp-validation-for="DescriptionInBulgarian" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DescriptionInEnglish" class="control-label"></label>TitleInEnglish
+                <label asp-for="DescriptionInEnglish" class="control-label">@Localizer["DescriptionEn"]</label>
                 <input asp-for="DescriptionInEnglish" class="form-control" />
                 <span asp-validation-for="DescriptionInEnglish" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PictureUrl" class="control-label"></label>
+                <label asp-for="ContentInBulgarian" class="control-label">@Localizer["ContentBg"]</label>
+                <textarea asp-for="ContentInBulgarian" class="form-control" rows="10" cols="20"></textarea>
+                <span asp-validation-for="ContentInBulgarian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContentInEnglish" class="control-label">@Localizer["ContentEn"]</label>
+                <textarea asp-for="ContentInEnglish" class="form-control" rows="10" cols="20"></textarea>
+                <span asp-validation-for="ContentInEnglish" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">@Localizer["Date"]</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PictureUrl" class="control-label">@Localizer["Picture"]</label>
                 <input asp-for="PictureUrl" class="form-control" />
                 <span asp-validation-for="PictureUrl" class="text-danger"></span>
             </div>
             <div class="form-group align-content-md-between">
-                <input type="submit" value="Create" class="btn btn-success" />
-                <a asp-action="All" class="btn btn-info">Back to List</a>
+                <input type="submit" value=@Localizer["CreateBtn"] class="btn btn-success" />
+                <a asp-action="All" class="btn btn-info">@Localizer["BackBtn"]</a>
             </div>
         </form>
     </div>
