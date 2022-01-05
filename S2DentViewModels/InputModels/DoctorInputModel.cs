@@ -1,6 +1,5 @@
 ﻿namespace S2Dent.ViewModels.InputModels
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Http;

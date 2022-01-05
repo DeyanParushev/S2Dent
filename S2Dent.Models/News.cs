@@ -28,6 +28,6 @@ namespace S2Dent.Models
 
         public string PictureUrl { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

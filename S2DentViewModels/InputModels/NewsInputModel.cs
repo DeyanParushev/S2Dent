@@ -1,14 +1,13 @@
-﻿using System;
+﻿using S2Dent.Models;
+using S2Dent.Services.Automapper;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace S2Dent.ViewModels.InputModels
 {
-    public class NewsInputModel
+    public class NewsInputModel : IMapTo<News>, IMapFrom<News>
     {
-        [Required]
-        public int Id { get; set; }
-
         [Required]
         [DisplayName("Title in Bulgarian")]
         [StringLength(120, ErrorMessage = ErrorMesssages.NameLenght, MinimumLength = 3)]
